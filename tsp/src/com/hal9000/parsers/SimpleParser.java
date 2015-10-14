@@ -1,6 +1,8 @@
 package com.hal9000.parsers;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rt on 14.10.15.
@@ -10,27 +12,33 @@ import java.io.*;
  *
  */
 public class SimpleParser implements Parser{
+
     @Override
     public TSPInstance parse(InputStream input) throws IOException {
         String name="";
-        String dim=""
+        String dim="";
         String comment="", line;
-        String[] pair;
+        String[] pair, coord;
         InputStreamReader reader = new InputStreamReader(input);
         BufferedReader br = new BufferedReader(reader);
-
+        List<Vertex> v = new ArrayList<>();
+        boolean flag=true;
 
         while((line = br.readLine()) != null){
-            pair = line.split(":");
-            name = pair[0].trim().equals("NAME") ? name = pair[1].trim() : name;
-            dim = pair[0].trim().equals("DIMENSION") ? dim = pair[1].trim() : dim;
-            comment = pair[0].trim().equals("COMMENT") ? comment = pair[1].trim() : comment;
-
-
+            coord = line.split(" ");
+            if(coord[0].equals("NODE") && coord[1].equals("COORD")) flag = false;
+            if(flag) {
+                pair = line.split(":");
+                name = pair[0].trim().equals("NAME") ? name = pair[1].trim() : name;
+                dim = pair[0].trim().equals("DIMENSION") ? dim = pair[1].trim() : dim;
+                comment = pair[0].trim().equals("COMMENT") ? comment = pair[1].trim() : comment;
+            }else {
+                v.add(new Vertex(Integer.parseInt(coord[0]),Float.parseFloat(coord[1]), Float.parseFloat(coord[2])));
+            }
 
         }
 
-        TSPInstance out = new TSPInstance<>(name,comment,Integer.parseInt(dim));
+        TSPInstance out = new TSPInstance(name,comment,Integer.parseInt(dim));
 
         return out;
     }
