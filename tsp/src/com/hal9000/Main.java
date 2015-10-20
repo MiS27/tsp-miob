@@ -3,6 +3,7 @@ package com.hal9000;
 import com.hal9000.parsers.Parser;
 import com.hal9000.parsers.SimpleParser;
 import com.hal9000.parsers.TSPInstance;
+import com.hal9000.random.SimpleRandom;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,6 +21,16 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(instance.getName());
+
+        SimpleRandom rand = new SimpleRandom(1);
+        System.out.println(rand.nextInt());
+        System.out.println(rand.nextInt());
+        System.out.println(rand.nextInt());
+        System.out.println(rand.nextInt());
+        System.out.println(rand.nextInt());
+        System.out.println(rand.nextInt());
+        System.out.println(rand.nextInt());
+
+
     }
 }
