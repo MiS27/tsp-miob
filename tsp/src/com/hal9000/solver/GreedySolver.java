@@ -17,7 +17,7 @@ public class GreedySolver extends LocalSearchSolver {
         for (int i = 0; !improved && i < problem.getDim(); i++) {
             for (int j = i + 1; !improved && j < problem.getDim(); j++) {
                 if (solution.getMoveDelta(i, j) < 0) {
-                    solution.move(bestA, bestB);
+                    solution.move(i, j);
                     improved = true;
                 }
             }
