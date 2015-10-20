@@ -29,14 +29,15 @@ public class SimpleParser implements Parser{
 
         while((line = br.readLine()) != null){
             coord = line.split(" ");
-            if(coord[0].equals("NODE") && coord[1].equals("COORD")) flag = false;
+            if(coord[0].trim().equals("NODE_COORD_SECTION")) {flag = false; continue;}
             if(flag) {
                 pair = line.split(":");
                 name = pair[0].trim().equals("NAME") ? name = pair[1].trim() : name;
                 dim = pair[0].trim().equals("DIMENSION") ? dim = pair[1].trim() : dim;
                 comment = pair[0].trim().equals("COMMENT") ? comment = pair[1].trim() : comment;
             }else {
-                v.add(new City(Integer.parseInt(coord[0]),Float.parseFloat(coord[1]), Float.parseFloat(coord[2])));
+                if(coord[0].trim().equals("EOF")) break;
+                v.add(new City(Integer.parseInt(coord[0]),Double.parseDouble(coord[1]), Double.parseDouble(coord[2])));
             }
 
         }
