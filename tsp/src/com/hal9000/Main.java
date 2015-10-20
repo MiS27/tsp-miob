@@ -2,7 +2,7 @@ package com.hal9000;
 
 import com.hal9000.parsers.Parser;
 import com.hal9000.parsers.SimpleParser;
-import com.hal9000.parsers.TSPInstance;
+import com.hal9000.data.TSPInstance;
 import com.hal9000.random.SimpleRandom;
 
 import java.io.FileInputStream;

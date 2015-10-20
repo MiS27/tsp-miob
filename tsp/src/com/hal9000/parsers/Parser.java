@@ -1,6 +1,7 @@
 package com.hal9000.parsers;
 
-import java.io.FileReader;
+import com.hal9000.data.TSPInstance;
+
 import java.io.IOException;
 import java.io.InputStream;
 

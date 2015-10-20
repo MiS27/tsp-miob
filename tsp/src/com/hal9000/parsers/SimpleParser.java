@@ -1,5 +1,8 @@
 package com.hal9000.parsers;
 
+import com.hal9000.data.TSPInstance;
+import com.hal9000.data.City;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,7 @@ public class SimpleParser implements Parser{
         String[] pair, coord;
         InputStreamReader reader = new InputStreamReader(input);
         BufferedReader br = new BufferedReader(reader);
-        List<Vertex> v = new ArrayList<>();
+        List<City> v = new ArrayList<>();
         boolean flag=true;
 
         while((line = br.readLine()) != null){
@@ -33,7 +36,7 @@ public class SimpleParser implements Parser{
                 dim = pair[0].trim().equals("DIMENSION") ? dim = pair[1].trim() : dim;
                 comment = pair[0].trim().equals("COMMENT") ? comment = pair[1].trim() : comment;
             }else {
-                v.add(new Vertex(Integer.parseInt(coord[0]),Float.parseFloat(coord[1]), Float.parseFloat(coord[2])));
+                v.add(new City(Integer.parseInt(coord[0]),Float.parseFloat(coord[1]), Float.parseFloat(coord[2])));
             }
 
         }
