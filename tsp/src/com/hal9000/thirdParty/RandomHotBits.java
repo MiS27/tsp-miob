@@ -4,7 +4,7 @@ import java.net.*;
 import java.io.*;
 
 /**
-    Implementation of a <b>RandomX</b>-compliant class which obtains
+    Implementation of a <b>randomX</b>-compliant class which obtains
     genuine random data from <a href="http://www.fourmilab.ch/">John
     Walker</a>'s <a href="http://www.fourmilab.ch/hotbits/">HotBits</a>
     radioactive decay random sequence generator.
@@ -62,4 +62,4 @@ public class RandomHotBits extends RandomX {
             throw new RuntimeException("Cannot obtain HotBits");
         }
     }
-};
+}
