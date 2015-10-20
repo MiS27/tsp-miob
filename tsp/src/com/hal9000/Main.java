@@ -10,7 +10,6 @@ import com.hal9000.time.SimpleTimer;
 import com.hal9000.time.Timer;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main {
@@ -20,11 +19,8 @@ public class Main {
         try {
             Parser p = new SimpleParser();
             instance = p.parse(new FileInputStream("u574.tsp"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
 
         Timer timer = new SimpleTimer();
