@@ -23,13 +23,13 @@ public class Main {
         }
 
         SimpleRandom rand = new SimpleRandom(1);
-        System.out.println(rand.nextInt());
-        System.out.println(rand.nextInt());
-        System.out.println(rand.nextInt());
-        System.out.println(rand.nextInt());
-        System.out.println(rand.nextInt());
-        System.out.println(rand.nextInt());
-        System.out.println(rand.nextInt());
+        System.out.println(rand.nextInt(100, true));
+        System.out.println(rand.nextInt(100, true));
+        System.out.println(rand.nextInt(100, true));
+        System.out.println(rand.nextInt(100, true));
+        System.out.println(rand.nextInt(100, true));
+        System.out.println(rand.nextInt(100, true));
+        System.out.println(rand.nextInt(100, true));
 
 
     }

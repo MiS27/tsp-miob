@@ -15,11 +15,17 @@ public class SimpleRandom implements Random{
     }
 
     @Override
-    public int nextInt() {
+    public int nextInt(int n, boolean unsigned) {
         last = (System.nanoTime() * last + System.currentTimeMillis());
+        last = unsigned ? Math.abs(last) : last;
+        return (int)(last%n);
+    }
+    @Override
+    public int nextInt(boolean unsigned) {
+        last = (System.nanoTime() * last + System.currentTimeMillis());
+        last = unsigned ? Math.abs(last) : last;
         return (int)(last%Integer.MAX_VALUE);
     }
-
     @Override
     public double nextDouble() {
         return 0;
