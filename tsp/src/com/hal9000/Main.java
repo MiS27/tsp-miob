@@ -6,6 +6,7 @@ import com.hal9000.data.TSPInstance;
 import com.hal9000.random.SimpleRandom;
 import com.hal9000.time.SimpleTimer;
 import com.hal9000.time.Timer;
+import com.hal9000.random.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,14 +30,9 @@ public class Main {
         timer.start();
 
         SimpleRandom rand = new SimpleRandom(1);
-        for(int i=0; i < 100000; i++) {
-            System.out.println(rand.nextInt(100, true));
-            System.out.println(rand.nextInt(100, true));
-            System.out.println(rand.nextInt(100, true));
-            System.out.println(rand.nextInt(100, true));
-            System.out.println(rand.nextInt(100, true));
-            System.out.println(rand.nextInt(100, true));
-            System.out.println(rand.nextInt(100, true));
+        randomHotBits rr = new randomHotBits();
+        for(int i=0; i < 1000; i++) {
+            System.out.print(Math.abs(rr.nextInt()%100) + "|");
         }
         timer.stop();
         System.out.println(timer.result());
