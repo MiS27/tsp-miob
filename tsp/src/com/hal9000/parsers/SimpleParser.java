@@ -41,7 +41,7 @@ public class SimpleParser implements Parser{
 
         }
 
-        TSPInstance out = new TSPInstance(name,comment,Integer.parseInt(dim));
+        TSPInstance out = new TSPInstance(name,comment,Integer.parseInt(dim),v);
 
         return out;
     }
