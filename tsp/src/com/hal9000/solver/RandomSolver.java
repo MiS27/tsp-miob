@@ -10,7 +10,7 @@ import java.util.Collections;
  */
 public class RandomSolver implements Solver {
 
-    private Solution solution;
+    protected Solution solution;
 
     public RandomSolver(TSPInstance problem) {
         ArrayList<Integer> sequence = new ArrayList<>(problem.getDim());
