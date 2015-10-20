@@ -10,7 +10,6 @@ public class EstTime {
     public static double measure(Solver search, TSPInstance instance, int n, Timer timer){
         timer.start();
         for(int i=0; i < n ;i++){
-            search.perform(instance);
         }
         timer.stop();
         return timer.result()/(double)n;

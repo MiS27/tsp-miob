@@ -20,6 +20,7 @@ public class TSPInstance {
         recalculate();
     }
 
+
     public void recalculate(){
         for(int i = 0 ; i < cities.size(); i++){
             for(int j = 0 ; j < cities.size(); j++){
