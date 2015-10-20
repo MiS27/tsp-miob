@@ -4,9 +4,9 @@ import com.hal9000.parsers.Parser;
 import com.hal9000.parsers.SimpleParser;
 import com.hal9000.data.TSPInstance;
 import com.hal9000.random.SimpleRandom;
+import com.hal9000.thirdParty.RandomHotBits;
 import com.hal9000.time.SimpleTimer;
 import com.hal9000.time.Timer;
-import com.hal9000.random.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,7 +30,7 @@ public class Main {
         timer.start();
 
         SimpleRandom rand = new SimpleRandom(1);
-        randomHotBits rr = new randomHotBits();
+        RandomHotBits rr = new RandomHotBits();
         for(int i=0; i < 1000; i++) {
             System.out.print(Math.abs(rr.nextInt()%100) + "|");
         }
