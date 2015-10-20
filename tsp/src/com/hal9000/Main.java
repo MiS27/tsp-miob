@@ -4,6 +4,8 @@ import com.hal9000.parsers.Parser;
 import com.hal9000.parsers.SimpleParser;
 import com.hal9000.data.TSPInstance;
 import com.hal9000.random.SimpleRandom;
+import com.hal9000.time.SimpleTimer;
+import com.hal9000.time.Timer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,16 +22,24 @@ public class Main {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
 
+        Timer timer = new SimpleTimer();
+        timer.start();
+
         SimpleRandom rand = new SimpleRandom(1);
-        System.out.println(rand.nextInt(100, true));
-        System.out.println(rand.nextInt(100, true));
-        System.out.println(rand.nextInt(100, true));
-        System.out.println(rand.nextInt(100, true));
-        System.out.println(rand.nextInt(100, true));
-        System.out.println(rand.nextInt(100, true));
-        System.out.println(rand.nextInt(100, true));
+        for(int i=0; i < 100000; i++) {
+            System.out.println(rand.nextInt(100, true));
+            System.out.println(rand.nextInt(100, true));
+            System.out.println(rand.nextInt(100, true));
+            System.out.println(rand.nextInt(100, true));
+            System.out.println(rand.nextInt(100, true));
+            System.out.println(rand.nextInt(100, true));
+            System.out.println(rand.nextInt(100, true));
+        }
+        timer.stop();
+        System.out.println(timer.result());
 
 
     }
