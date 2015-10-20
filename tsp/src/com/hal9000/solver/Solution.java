@@ -15,7 +15,6 @@ public class Solution {
 
     private TSPInstance problem;
 
-    //TODO: should accept problem instance
     public Solution(ArrayList<Integer> solution, TSPInstance problem) {
         this.solution = solution;
         this.problem = problem;
