@@ -24,29 +24,42 @@ public class Solution {
         Collections.swap(solution, a, b);
     }
 
+    //TODO: To refactor
     public double getMoveDelta(int a, int b) {
+        double positive;
+        double negative;
+        int aVal = solution.get(a);
+        int bVal = solution.get(b);
         int aPredecessor = getPredecessor(a);
         int aSuccessor = getSuccessor(a);
         int bPredecessor = getPredecessor(b);
         int bSuccessor = getSuccessor(b);
-        double positive = problem.getDistance(a, bPredecessor) + problem.getDistance(a, bSuccessor) +
-                problem.getDistance(b, aPredecessor) + problem.getDistance(b, aSuccessor);
-        double negative = problem.getDistance(a, aPredecessor) + problem.getDistance(a, aSuccessor) +
-                problem.getDistance(b, bPredecessor) + problem.getDistance(b, bSuccessor);
+        if (aVal == bPredecessor) {
+            positive = problem.getDistance(aVal, bSuccessor) + problem.getDistance(bVal, aPredecessor);
+            negative = problem.getDistance(aVal, aPredecessor) + problem.getDistance(bVal, bSuccessor);
+        } else if (aVal == bSuccessor) {
+            positive = problem.getDistance(aVal, bPredecessor) + problem.getDistance(bVal, aSuccessor);
+            negative = problem.getDistance(aVal, aSuccessor) + problem.getDistance(bVal, bPredecessor);
+        } else {
+            positive = problem.getDistance(aVal, bPredecessor) + problem.getDistance(aVal, bSuccessor) +
+                    problem.getDistance(bVal, aPredecessor) + problem.getDistance(bVal, aSuccessor);
+            negative = problem.getDistance(aVal, aPredecessor) + problem.getDistance(aVal, aSuccessor) +
+                    problem.getDistance(bVal, bPredecessor) + problem.getDistance(bVal, bSuccessor);
+        }
         return positive - negative;
     }
 
     private int getPredecessor(int a) {
         if (a == 0) {
-            return solution.size() - 1;
+            return solution.get(solution.size() - 1);
         }
-        return a - 1;
+        return solution.get(a - 1);
     }
 
     private int getSuccessor(int a) {
         if (a == solution.size() - 1) {
-            return 0;
+            return solution.get(0);
         }
-        return a + 1;
+        return solution.get(a + 1);
     }
 }
