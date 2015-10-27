@@ -28,7 +28,7 @@ public class SimpleParser implements Parser{
         boolean flag=true;
 
         while((line = br.readLine()) != null){
-            coord = line.split(" ");
+            coord = line.trim().split(" +");
             if(coord[0].trim().equals("NODE_COORD_SECTION")) {flag = false; continue;}
             if(flag) {
                 pair = line.split(":");
@@ -56,10 +56,12 @@ public class SimpleParser implements Parser{
         String line;
         while((line = br.readLine()) != null){
             if(line.trim().equals("TOUR_SECTION")) {flag = false; continue;}
-            Integer i = Integer.parseInt(line);
-            if(i<0) break;
-            tour.add(i);
-            
+            if(!flag) {
+                Integer i = Integer.parseInt(line);
+                if (i < 0) break;
+                tour.add(i);
+            }
+
 
         }
         out.setOptimal(tour);

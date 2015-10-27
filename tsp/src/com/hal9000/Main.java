@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, String> input = new TreeMap<>();
-        input.put("tsp/test/u574.tsp",null);
+        input.put("tsp/test/a280.tsp","tsp/test/a280.opt.tour");
 
 
         Environment env = new Environment(input);
