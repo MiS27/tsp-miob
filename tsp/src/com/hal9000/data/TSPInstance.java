@@ -9,7 +9,7 @@ public class TSPInstance {
     private List<City> cities;
     private double[][] distMatrix;
 
-    private List<City> optimal=null;
+    private List<Integer> optimal=null;
     private double optimalValue=-1.0;
 
 
@@ -69,11 +69,11 @@ public class TSPInstance {
         this.cities = cities;
     }
 
-    public List<City> getOptimal() {
+    public List<Integer> getOptimal() {
         return optimal;
     }
 
-    public void setOptimal(List<City> optimal) {
+    public void setOptimal(List<Integer> optimal) {
         this.optimal = optimal;
     }
 

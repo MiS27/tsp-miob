@@ -49,6 +49,20 @@ public class SimpleParser implements Parser{
     @Override
     public TSPInstance parse(InputStream input, InputStream test) throws IOException {
         TSPInstance out = parse(input);
+        InputStreamReader reader = new InputStreamReader(test);
+        BufferedReader br = new BufferedReader(reader);
+        List<Integer> tour = new ArrayList<Integer>();
+        boolean flag = true;
+        String line;
+        while((line = br.readLine()) != null){
+            if(line.trim().equals("TOUR_SECTION")) {flag = false; continue;}
+            Integer i = Integer.parseInt(line);
+            if(i<0) break;
+            tour.add(i);
+            
+
+        }
+        out.setOptimal(tour);
 
         return out;
     }
