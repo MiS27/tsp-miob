@@ -43,6 +43,12 @@ public class SimpleParser implements Parser{
         }
 
         TSPInstance out = new TSPInstance(name,comment,Integer.parseInt(dim),v);
+        return out;
+    }
+
+    @Override
+    public TSPInstance parse(InputStream input, InputStream test) throws IOException {
+        TSPInstance out = parse(input);
 
         return out;
     }

@@ -2,15 +2,17 @@ package com.hal9000.data;
 
 import java.util.List;
 
-/**
- * Created by rt on 14.10.15.
- */
 public class TSPInstance {
     private String name;
     private String comment;
     private int dim;
     private List<City> cities;
     private double[][] distMatrix;
+
+    private List<City> optimal=null;
+    private double optimalValue=-1.0;
+
+
     public TSPInstance(String name, String comment, int dim, List<City> cities){
         this.setName(name);
         this.setComment(comment);
@@ -65,5 +67,21 @@ public class TSPInstance {
 
     public void setCities(List<City> cities) {
         this.cities = cities;
+    }
+
+    public List<City> getOptimal() {
+        return optimal;
+    }
+
+    public void setOptimal(List<City> optimal) {
+        this.optimal = optimal;
+    }
+
+    public double getOptimalValue() {
+        return optimalValue;
+    }
+
+    public void setOptimalValue(double optimalValue) {
+        this.optimalValue = optimalValue;
     }
 }
