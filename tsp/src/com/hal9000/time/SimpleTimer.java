@@ -8,8 +8,6 @@ import java.util.Date;
 public class SimpleTimer implements Timer{
 
     private long start,stop;
-    public SimpleTimer(){
-    }
     @Override
     public void start() {
         start = 0;
@@ -24,6 +22,6 @@ public class SimpleTimer implements Timer{
 
     @Override
     public double result() {
-        return Math.floor((stop - start)/1000000000);
+        return stop - start;
     }
 }

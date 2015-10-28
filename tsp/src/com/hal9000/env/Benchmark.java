@@ -8,4 +8,8 @@ public class Benchmark {
     public static double optDist(TSPInstance instance, Solution solution){
         return instance.getCost(solution.getSolution()) - instance.getOptimalValue();
     }
+
+    public static void addToReport(Report report){
+
+    }
 }

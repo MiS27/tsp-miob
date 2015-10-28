@@ -9,6 +9,7 @@ import com.hal9000.solver.HeuristicSolver;
 import com.hal9000.solver.Solver;
 import com.hal9000.solver.SteepestSolver;
 import com.hal9000.time.NTimer;
+import com.hal9000.time.SimpleTimer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,15 +55,20 @@ public class Environment {
     }
 
     private void run(SolverType type, int N, int instance) {
-        NTimer timer = new NTimer();
+        //NTimer timer = new NTimer();
+        SimpleTimer timer = new SimpleTimer();
         int it = 0;
         timer.start();
         double dist = 0.0;
-        while (true) {
+        /*while (true) {
             dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
             it++;
             if (timer.check(N)) break;
-        }
+        }*/
+
+        dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
+        timer.stop();
+
 
         System.out.println("time: " + String.valueOf(timer.result()));
         System.out.println(timer.result() / it);
