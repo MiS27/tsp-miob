@@ -1,36 +1,48 @@
 package com.hal9000.data;
 
 import java.util.List;
+import java.util.Map;
 
 public class TSPInstance {
     private String name;
     private String comment;
     private int dim;
-    private List<City> cities;
+    //private List<City> cities;
+    private Map<Integer, City> cities;
     private double[][] distMatrix;
 
     private List<Integer> optimal=null;
     private double optimalValue=-1.0;
 
 
-    public TSPInstance(String name, String comment, int dim, List<City> cities){
+    public TSPInstance(String name, String comment, int dim, Map<Integer,City> cities){
         this.setName(name);
         this.setComment(comment);
         this.setDim(dim);
         this.cities = cities;
-        distMatrix = new double[cities.size()][cities.size()];
+        distMatrix = new double[dim+1][dim+1];
         recalculate();
     }
 
 
     public void recalculate(){
-        for(int i = 0 ; i < cities.size(); i++){
-            for(int j = 0 ; j < cities.size(); j++){
+        for(int i = 1 ; i < dim+1; i++){
+            for(int j = 1 ; j < dim+1; j++){
                 distMatrix[i][j] = Math.sqrt(
                                     Math.pow(cities.get(i).getX()-cities.get(j).getX(),2.0)+
                                     Math.pow(cities.get(i).getY()-cities.get(j).getY(),2.0));
             }
         }
+    }
+
+
+    public double getCost(List<Integer> src){
+        double opt = 0.0;
+        for(int i =0; i<src.size()-1;i++){
+            //TODO
+            opt += getDistance(src.get(i), src.get(i + 1));
+        }
+        return opt;
     }
 
     public double getDistance(int i, int j){
@@ -61,11 +73,11 @@ public class TSPInstance {
         this.dim = dim;
     }
 
-    public List<City> getCities() {
+    public Map<Integer, City> getCities() {
         return cities;
     }
 
-    public void setCities(List<City> cities) {
+    public void setCities(Map<Integer,City> cities) {
         this.cities = cities;
     }
 
@@ -75,6 +87,7 @@ public class TSPInstance {
 
     public void setOptimal(List<Integer> optimal) {
         this.optimal = optimal;
+        this.optimalValue = getCost(optimal);
     }
 
     public double getOptimalValue() {

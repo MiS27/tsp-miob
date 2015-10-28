@@ -6,6 +6,8 @@ import com.hal9000.data.City;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by rt on 14.10.15.
@@ -24,7 +26,7 @@ public class SimpleParser implements Parser{
         String[] pair, coord;
         InputStreamReader reader = new InputStreamReader(input);
         BufferedReader br = new BufferedReader(reader);
-        List<City> v = new ArrayList<>();
+        Map<Integer, City> v = new TreeMap<>();
         boolean flag=true;
 
         while((line = br.readLine()) != null){
@@ -37,7 +39,8 @@ public class SimpleParser implements Parser{
                 comment = pair[0].trim().equals("COMMENT") ? comment = pair[1].trim() : comment;
             }else {
                 if(coord[0].trim().equals("EOF")) break;
-                v.add(new City(Integer.parseInt(coord[0]),Double.parseDouble(coord[1]), Double.parseDouble(coord[2])));
+                v.put(Integer.parseInt(coord[0]),
+                        new City(Integer.parseInt(coord[0]),Double.parseDouble(coord[1]), Double.parseDouble(coord[2])));
             }
 
         }

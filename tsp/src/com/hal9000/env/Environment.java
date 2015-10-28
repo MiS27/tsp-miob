@@ -57,14 +57,17 @@ public class Environment {
         NTimer timer = new NTimer();
         int it = 0;
         timer.start();
+        double dist = 0.0;
         while (true) {
-            createSolver(type,instances.get(instance)).solve();
+            dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
             it++;
             if (timer.check(N)) break;
         }
 
         System.out.println("time: " + String.valueOf(timer.result()));
         System.out.println(timer.result() / it);
+        System.out.println("opt: ");
+        System.out.println(dist / it);
 
     }
 

@@ -4,7 +4,6 @@ import com.hal9000.data.TSPInstance;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by rt on 20.10.15.
@@ -21,15 +20,15 @@ public class Solution {
     }
 
     public void move(int a, int b) {
-        Collections.swap(solution, a, b);
+        Collections.swap(getSolution(), a, b);
     }
 
     //TODO: To refactor
     public double getMoveDelta(int a, int b) {
         double positive;
         double negative;
-        int aVal = solution.get(a);
-        int bVal = solution.get(b);
+        int aVal = getSolution().get(a);
+        int bVal = getSolution().get(b);
         int aPredecessor = getPredecessor(a);
         int aSuccessor = getSuccessor(a);
         int bPredecessor = getPredecessor(b);
@@ -51,15 +50,19 @@ public class Solution {
 
     private int getPredecessor(int a) {
         if (a == 0) {
-            return solution.get(solution.size() - 1);
+            return getSolution().get(getSolution().size() - 1);
         }
-        return solution.get(a - 1);
+        return getSolution().get(a - 1);
     }
 
     private int getSuccessor(int a) {
-        if (a == solution.size() - 1) {
-            return solution.get(0);
+        if (a == getSolution().size() - 1) {
+            return getSolution().get(0);
         }
-        return solution.get(a + 1);
+        return getSolution().get(a + 1);
+    }
+
+    public ArrayList<Integer> getSolution() {
+        return solution;
     }
 }
