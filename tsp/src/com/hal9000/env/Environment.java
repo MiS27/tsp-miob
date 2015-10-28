@@ -1,6 +1,7 @@
 package com.hal9000.env;
 
 import com.hal9000.data.TSPInstance;
+import com.hal9000.parsers.FileType;
 import com.hal9000.parsers.Parser;
 import com.hal9000.parsers.SimpleParser;
 import com.hal9000.solver.GreedySolver;
@@ -22,56 +23,12 @@ public class Environment {
 
     public List<TSPInstance> instances;
 
-    public Environment(Map<String, String> input) {
-        getInstances(input);
-    }
 
-    private void getInstances(Map<String, String> input) {
-        Parser parser = new SimpleParser();
+    public Environment(String dict, boolean allowNull, List<FileType> filesDef) {
         instances = new ArrayList<>();
-        try {
-            for (String in : input.keySet()) {
-                if (null == input.get(in)) {
-                    instances.add(parser.parse(new FileInputStream(in)));
-                } else {
-                    instances.add(parser.parse(new FileInputStream(in), new FileInputStream(input.get(in))));
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        for(FileType ft : filesDef){
+            instances.addAll(ft.getInstancesFromDict(dict,allowNull));
         }
-    }
-
-    public Environment(String dict, boolean allowNull) {
-        File dir = new File(dict);
-        File[] files = dir.listFiles();
-        Map<String, String> input = new TreeMap<>();
-        for (File f : files) {
-            if (f.isFile() && f.getName().endsWith("tsp")) {
-                input.put(dict+"/"+f.getName(), null);
-                continue;
-            }
-            if (f.isFile() && f.getName().endsWith("tour")) {
-                input.put(dict+"/"+f.getName().split("\\.")[0] + ".tsp", dict+"/"+f.getName());
-            }
-
-        }
-
-        if (!allowNull) {
-
-            Map<String, String> tmp = new TreeMap<>();
-
-            for (String k : input.keySet()) {
-                if (null != input.get(k)) {
-                    tmp.put(k, input.get(k));
-                }
-            }
-            getInstances(tmp);
-            return;
-        }
-
-        getInstances(input);
-
     }
 
     public Solver createSolver(SolverType type, TSPInstance instance) {
