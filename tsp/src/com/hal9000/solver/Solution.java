@@ -11,8 +11,17 @@ import java.util.Collections;
 public class Solution {
 
     private ArrayList<Integer> solution;
+    private double time;
 
     private TSPInstance problem;
+
+    public double getTime() {
+        return time;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
 
     public Solution(ArrayList<Integer> solution, TSPInstance problem) {
         this.solution = solution;

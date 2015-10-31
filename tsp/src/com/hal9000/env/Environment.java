@@ -2,30 +2,21 @@ package com.hal9000.env;
 
 import com.hal9000.data.TSPInstance;
 import com.hal9000.parsers.FileType;
-import com.hal9000.parsers.Parser;
-import com.hal9000.parsers.SimpleParser;
-import com.hal9000.solver.GreedySolver;
-import com.hal9000.solver.HeuristicSolver;
-import com.hal9000.solver.Solver;
-import com.hal9000.solver.SteepestSolver;
+import com.hal9000.solver.*;
 import com.hal9000.time.NTimer;
-import com.hal9000.time.SimpleTimer;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class Environment {
     public enum SolverType {GREEDY, STEEPEST, HEURISTIC}
 
     public List<TSPInstance> instances;
 
+    private Report report;
 
     public Environment(String dict, boolean allowNull, List<FileType> filesDef) {
+        report = new Report();
         instances = new ArrayList<>();
         for(FileType ft : filesDef){
             instances.addAll(ft.getInstancesFromDict(dict,allowNull));
@@ -55,19 +46,21 @@ public class Environment {
     }
 
     private void run(SolverType type, int N, int instance) {
-        //NTimer timer = new NTimer();
-        SimpleTimer timer = new SimpleTimer();
+        NTimer timer = new NTimer();
+        //SimpleTimer timer = new SimpleTimer();
         int it = 0;
         timer.start();
         double dist = 0.0;
-        /*while (true) {
+        while (true) {
+
             dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
             it++;
             if (timer.check(N)) break;
-        }*/
+        }
 
-        dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
-        timer.stop();
+        //dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
+       // timer.stop();
+
 
 
         System.out.println("time: " + String.valueOf(timer.result()));
