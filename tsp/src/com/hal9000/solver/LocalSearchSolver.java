@@ -16,11 +16,13 @@ public abstract class LocalSearchSolver extends RandomSolver {
 
     public Solution solve() {
         boolean perform = true;
-
+        int steps = 0;
         while (perform) {
             perform = step();
+            steps++;
         }
 
+        solution.setSteps(steps);
         return solution;
     }
 

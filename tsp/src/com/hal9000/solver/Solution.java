@@ -12,6 +12,7 @@ public class Solution {
 
     private ArrayList<Integer> solution;
     private double time;
+    private int steps;
 
     private TSPInstance problem;
 
@@ -73,5 +74,13 @@ public class Solution {
 
     public ArrayList<Integer> getSolution() {
         return solution;
+    }
+
+    public int getSteps() {
+        return steps;
+    }
+
+    public void setSteps(int steps) {
+        this.steps = steps;
     }
 }
