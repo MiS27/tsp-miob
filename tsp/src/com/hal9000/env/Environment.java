@@ -12,10 +12,11 @@ public class Environment {
     public enum SolverType {GREEDY, STEEPEST, HEURISTIC}
 
     public List<TSPInstance> instances;
-
+    private int perInstance;
     private Report report;
 
-    public Environment(String dict, boolean allowNull, List<FileType> filesDef) {
+    public Environment(String dict, boolean allowNull, List<FileType> filesDef, int perInstance) {
+        this.perInstance = perInstance;
         report = new Report();
         instances = new ArrayList<>();
         for(FileType ft : filesDef){
@@ -48,25 +49,21 @@ public class Environment {
     private void run(SolverType type, int N, int instance) {
         NTimer timer = new NTimer();
         //SimpleTimer timer = new SimpleTimer();
-        int it = 0;
-        timer.start();
-        double dist = 0.0;
-        while (true) {
+        Solution solution;
+        for(int i=0; i < perInstance;i++) {
+            int it = 0;
+            timer.start();
+            while (true) {
+                solution = createSolver(type, instances.get(instance)).solve();
+                it++;
+                if (timer.check(N)) break;
+            }
 
-            dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
-            it++;
-            if (timer.check(N)) break;
+            solution.setTime(timer.result() / it);
+            report.addToReport(type.toString(), instances.get(instance), solution);
+
         }
 
-        //dist+=Benchmark.optDist(instances.get(instance), createSolver(type, instances.get(instance)).solve());
-       // timer.stop();
-
-
-
-        System.out.println("time: " + String.valueOf(timer.result()));
-        System.out.println(timer.result() / it);
-        System.out.println("opt: ");
-        System.out.println(dist / it);
 
     }
 

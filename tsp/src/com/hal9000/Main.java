@@ -13,7 +13,7 @@ public class Main {
         List<FileType> filesDefs = new ArrayList<>();
         filesDefs.add(new FileType(".tsp",".opt.tour",new SimpleParser()));
 
-        Environment env = new Environment("tsp/test",false, filesDefs);
+        Environment env = new Environment("tsp/test",false, filesDefs,10);
         env.run(Environment.SolverType.STEEPEST,1);
 
     }
