@@ -4,6 +4,8 @@ import com.hal9000.data.TSPInstance;
 import com.hal9000.parsers.FileType;
 import com.hal9000.solver.*;
 import com.hal9000.time.NTimer;
+import com.hal9000.time.SimpleTimer;
+import com.hal9000.time.Timer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,29 +41,19 @@ public class Environment {
         }
         return null;
     }
-    public void run(SolverType type, int N){
+    public void run(SolverType type, Timer timer){
         for(int i=0; i< instances.size();i++){
             System.out.println(instances.get(i).getName());
-            run(type,N,i);
+            run(type,timer,i);
         }
     }
 
-    private void run(SolverType type, int N, int instance) {
-        NTimer timer = new NTimer();
-        //SimpleTimer timer = new SimpleTimer();
+    private void run(SolverType type, Timer timer, int instance) {
         Solution solution;
         for(int i=0; i < perInstance;i++) {
-            int it = 0;
-            timer.start();
-            while (true) {
-                solution = createSolver(type, instances.get(instance)).solve();
-                it++;
-                if (timer.check(N)) break;
-            }
-
-            solution.setTime(timer.result() / it);
+            solution = timer.measure(createSolver(type,instances.get(instance)));
             report.addToReport(type.toString(), instances.get(instance), solution);
-
+            System.out.println(solution.getTime());
         }
 
 

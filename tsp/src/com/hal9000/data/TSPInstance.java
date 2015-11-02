@@ -1,9 +1,12 @@
 package com.hal9000.data;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class TSPInstance {
+public class TSPInstance implements Comparable<TSPInstance>{
+    private Integer id = ++ID;
+    private static Integer ID=0;
     private String name;
     private String comment;
     private int dim;
@@ -96,5 +99,10 @@ public class TSPInstance {
 
     public void setOptimalValue(double optimalValue) {
         this.optimalValue = optimalValue;
+    }
+
+    @Override
+    public int compareTo(TSPInstance instance) {
+        return id.compareTo(instance.id);
     }
 }

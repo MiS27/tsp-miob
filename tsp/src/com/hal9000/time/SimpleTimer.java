@@ -1,5 +1,8 @@
 package com.hal9000.time;
 
+import com.hal9000.solver.Solution;
+import com.hal9000.solver.Solver;
+
 import java.util.Date;
 
 /**
@@ -23,5 +26,14 @@ public class SimpleTimer implements Timer{
     @Override
     public double result() {
         return stop - start;
+    }
+
+    @Override
+    public Solution measure(Solver solver) {
+        start();
+        Solution solution = solver.solve();
+        stop();
+        solution.setTime(result()/1000000000);
+        return  solution;
     }
 }
