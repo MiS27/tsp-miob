@@ -60,7 +60,7 @@ public class Environment {
         for(int i=0; i < perInstance;i++) {
             solution = timer.measure(createSolver(type,instances.get(instance)));
             report.addToReport(type.toString(), instances.get(instance), solution);
-            System.out.println(solution.getTime());
+            //System.out.println(solution.getTime());
         }
 
 

@@ -1,7 +1,6 @@
 package com.hal9000;
 
 import com.hal9000.env.Environment;
-import com.hal9000.env.ROutputFormatter;
 import com.hal9000.parsers.FileType;
 import com.hal9000.parsers.SimpleParser;
 import com.hal9000.time.SimpleTimer;
@@ -21,7 +20,7 @@ public class Main {
         //env.run(Environment.SolverType.GREEDY,new SimpleTimer());
         //env.run(Environment.SolverType.HEURISTIC,new SimpleTimer());
 
-        env.getReport().dump(new ROutputFormatter(), "full-report.csv");
+        env.getReport().dump("full-report.csv");
 
     }
 }

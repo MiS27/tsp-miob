@@ -24,10 +24,18 @@ public class Report{
 
     }
 
-    public void dump(OutputFormatter outputFormatter, String file){
+    public void dump(String file){
+
+
         try{
             Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"utf-8"));
-            writer.write("");
+
+            for(String s : solutions.keySet()){
+
+            }
+
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
