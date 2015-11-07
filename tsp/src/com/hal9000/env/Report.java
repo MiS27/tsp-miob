@@ -3,6 +3,7 @@ package com.hal9000.env;
 import com.hal9000.data.TSPInstance;
 import com.hal9000.solver.Solution;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +24,19 @@ public class Report{
 
     }
 
-    public void dump(OutputFormatter outputFormatter){
+    public void dump(OutputFormatter outputFormatter, String file){
+        try{
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"utf-8"));
+            writer.write("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
 
 }
 

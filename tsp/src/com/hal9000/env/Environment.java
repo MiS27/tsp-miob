@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Environment {
-    public enum SolverType {GREEDY, STEEPEST, HEURISTIC}
+    public enum SolverType {GREEDY, STEEPEST, HEURISTIC, RANDOM}
 
     public List<TSPInstance> instances;
     private int perInstance;
@@ -26,6 +26,10 @@ public class Environment {
         }
     }
 
+    public Report getReport() {
+        return report;
+    }
+
     public Solver createSolver(SolverType type, TSPInstance instance) {
         switch (type) {
             case STEEPEST: {
@@ -36,6 +40,9 @@ public class Environment {
             }
             case HEURISTIC: {
                 return new HeuristicSolver(instance);
+            }
+            case RANDOM:{
+                return new RandomSolver(instance);
             }
 
         }
