@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Report{
+public abstract  class Report{
     public Map<String, Map<TSPInstance, List<Solution>>> solutions;
 
     public Report(){
@@ -24,27 +24,7 @@ public class Report{
 
     }
 
-    public void dump(String file){
-
-
-        try{
-            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"utf-8"));
-
-            for(String s : solutions.keySet()){
-
-            }
-
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
+    public abstract void dump(String file, String sep);
 
 }
 
