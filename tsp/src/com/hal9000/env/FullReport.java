@@ -8,24 +8,39 @@ import java.io.*;
 public class FullReport extends Report{
 
     @Override
-    public void dump(String file, String sep){
+    public void dump(String file, String sep, boolean separate){
 
-
+        Writer writer = null;
         try{
-            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"utf-8"));
+            if(!separate) {
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 
-            StringBuilder header = new StringBuilder();
-            header.append("alg").append(sep)
-                    .append("instName").append(sep)
-                    .append("instDim").append(sep)
-                    .append("instOptVal").append(sep)
-                    .append("solTime").append(sep)
-                    .append("solVal").append("\n");
+                StringBuilder header = new StringBuilder();
+                header.append("alg").append(sep)
+                        .append("instName").append(sep)
+                        .append("instDim").append(sep)
+                        .append("instOptVal").append(sep)
+                        .append("solTime").append(sep)
+                        .append("solVal").append("\n");
 
 
-            writer.write(header.toString());
-
+                writer.write(header.toString());
+            }
             for(String s : solutions.keySet()){
+                if(separate){
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(s+"-"+file), "utf-8"));
+
+                StringBuilder header = new StringBuilder();
+                header.append("alg").append(sep)
+                        .append("instName").append(sep)
+                        .append("instDim").append(sep)
+                        .append("instOptVal").append(sep)
+                        .append("solTime").append(sep)
+                        .append("solVal").append("\n");
+
+
+                writer.write(header.toString());
+                }
                 for(TSPInstance instance : solutions.get(s).keySet()){
                     for(Solution solution : solutions.get(s).get(instance)){
                         writer.write

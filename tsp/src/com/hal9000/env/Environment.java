@@ -19,7 +19,7 @@ public class Environment {
 
     public Environment(String dict, boolean allowNull, List<FileType> filesDef, int perInstance) {
         this.perInstance = perInstance;
-        report = new Report();
+        report = new FullReport();
         instances = new ArrayList<>();
         for(FileType ft : filesDef){
             instances.addAll(ft.getInstancesFromDict(dict,allowNull));

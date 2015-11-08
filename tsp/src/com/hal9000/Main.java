@@ -20,7 +20,7 @@ public class Main {
         //env.run(Environment.SolverType.GREEDY,new SimpleTimer());
         //env.run(Environment.SolverType.HEURISTIC,new SimpleTimer());
 
-        env.getReport().dump("full-report.csv", "|");
+        env.getReport().dump("full-report.csv", "|", true);
 
     }
 }

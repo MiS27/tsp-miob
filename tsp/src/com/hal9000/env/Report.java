@@ -24,7 +24,7 @@ public abstract  class Report{
 
     }
 
-    public abstract void dump(String file, String sep);
+    public abstract void dump(String file, String sep, boolean separate);
 
 }
 
