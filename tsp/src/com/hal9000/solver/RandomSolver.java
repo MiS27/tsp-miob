@@ -19,6 +19,7 @@ public class RandomSolver implements Solver {
         }
         Collections.shuffle(sequence);
         solution = new Solution(sequence, problem);
+        solution.setSteps(1);
     }
 
     public Solution solve() {

@@ -15,10 +15,10 @@ public class Main {
         filesDefs.add(new FileType(".tsp", ".opt.tour", new SimpleParser()));
 
         Environment env = new Environment("tsp/test",false, filesDefs,10);
-        env.run(Environment.SolverType.RANDOM,new SimpleTimer());
+        //env.run(Environment.SolverType.RANDOM,new SimpleTimer());
         //env.run(Environment.SolverType.STEEPEST,new SimpleTimer());
         //env.run(Environment.SolverType.GREEDY,new SimpleTimer());
-        //env.run(Environment.SolverType.HEURISTIC,new SimpleTimer());
+        env.run(Environment.SolverType.HEURISTIC,new SimpleTimer());
 
         env.getReport().dump("full-report.csv", "|", true);
 

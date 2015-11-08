@@ -13,6 +13,7 @@ public class Solution {
     private ArrayList<Integer> solution;
     private double time;
     private int steps;
+    private int checked;
 
     private TSPInstance problem;
 
@@ -82,5 +83,13 @@ public class Solution {
 
     public void setSteps(int steps) {
         this.steps = steps;
+    }
+
+    public int getChecked() {
+        return checked;
+    }
+
+    public void setChecked(int checked) {
+        this.checked = checked;
     }
 }
