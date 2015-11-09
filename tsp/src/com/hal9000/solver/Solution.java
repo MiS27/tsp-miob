@@ -29,7 +29,7 @@ public class Solution {
         this.solution = solution;
         this.problem = problem;
     }
-
+/*
     public void move(int a, int b) {
         Collections.swap(getSolution(), a, b);
     }
@@ -58,7 +58,8 @@ public class Solution {
         }
         return positive - negative;
     }
-
+*/
+    /*
     private int getPredecessor(int a) {
         if (a == 0) {
             return getSolution().get(getSolution().size() - 1);
@@ -72,7 +73,7 @@ public class Solution {
         }
         return getSolution().get(a + 1);
     }
-
+*/
     public ArrayList<Integer> getSolution() {
         return solution;
     }
@@ -91,5 +92,9 @@ public class Solution {
 
     public void setChecked(int checked) {
         this.checked = checked;
+    }
+
+    public TSPInstance getProblem() {
+        return problem;
     }
 }

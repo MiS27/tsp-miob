@@ -3,6 +3,7 @@ package com.hal9000;
 import com.hal9000.env.Environment;
 import com.hal9000.parsers.FileType;
 import com.hal9000.parsers.SimpleParser;
+import com.hal9000.solver.City2Opt;
 import com.hal9000.time.SimpleTimer;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Main {
 
         Environment env = new Environment("tsp/test",false, filesDefs,10);
         //env.run(Environment.SolverType.RANDOM,new SimpleTimer());
-        env.run(Environment.SolverType.STEEPEST,new SimpleTimer());
+        env.run(Environment.SolverType.STEEPEST,new SimpleTimer(), new City2Opt());
         //env.run(Environment.SolverType.GREEDY,new SimpleTimer());
         //env.run(Environment.SolverType.HEURISTIC,new SimpleTimer());
 

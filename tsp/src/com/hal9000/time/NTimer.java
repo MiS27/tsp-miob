@@ -1,5 +1,6 @@
 package com.hal9000.time;
 
+import com.hal9000.env.Arg;
 import com.hal9000.solver.Solution;
 import com.hal9000.solver.Solver;
 
@@ -30,12 +31,12 @@ public class NTimer implements Timer{
     }
 
     @Override
-    public Solution measure(Solver solver) {
+    public Solution measure(Solver solver, Arg argument) {
         Solution solution=null;
         start();
         int it=0;
         while(true){
-            solution = solver.solve();
+            solution = solver.solve(argument);
             it++;
             if(check(N)) break;
         }

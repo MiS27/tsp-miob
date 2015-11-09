@@ -58,7 +58,7 @@ public class Environment {
     private void run(SolverType type, Timer timer, int instance, Arg argument) {
         Solution solution;
         for(int i=0; i < perInstance;i++) {
-            solution = timer.measure(createSolver(type,instances.get(instance)));
+            solution = timer.measure(createSolver(type,instances.get(instance)),argument);
             report.addToReport(type.toString(), instances.get(instance), solution);
             //System.out.println(solution.getTime());
         }
