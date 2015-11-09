@@ -33,6 +33,7 @@ public class HeuristicSolver implements Solver {
     private int getClosest(int last, List<Integer> sequence) {
         double distance;
         int bestIdx = 0;
+        int result ;
         double bestDistance = problem.getDistance(last, sequence.get(0));
         for (int i = 1; i < sequence.size(); i++) {
             distance = problem.getDistance(last, sequence.get(i));
@@ -41,8 +42,9 @@ public class HeuristicSolver implements Solver {
                 bestIdx = i;
             }
         }
-        sequence.remove(bestIdx);
-        return bestIdx;
+        result = sequence.get(bestIdx);
+        sequence.remove(sequence.get(bestIdx));
+        return result;
     }
 
     public Solution solve() {
