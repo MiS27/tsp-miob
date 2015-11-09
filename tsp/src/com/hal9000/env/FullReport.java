@@ -4,12 +4,13 @@ import com.hal9000.data.TSPInstance;
 import com.hal9000.solver.Solution;
 
 import java.io.*;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class FullReport extends Report{
 
     @Override
     public void dump(String file, String sep, boolean separate){
-
         Writer writer = null;
         try{
             if(!separate) {
@@ -68,12 +69,12 @@ public class FullReport extends Report{
             }
 
         writer.close();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 
