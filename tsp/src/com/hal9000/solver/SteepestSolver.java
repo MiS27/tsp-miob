@@ -1,6 +1,7 @@
 package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
+import com.hal9000.env.Arg;
 
 /**
  * Created by rt on 19.10.15.
@@ -12,7 +13,7 @@ public class SteepestSolver extends LocalSearchSolver {
     }
 
     @Override
-    protected boolean step() {
+    protected boolean step(Arg argument) {
         double delta = 0;
         double tmpDelta;
         int bestA = 0;

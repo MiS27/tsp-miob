@@ -1,6 +1,7 @@
 package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
+import com.hal9000.env.Arg;
 
 /**
  * Created by rt on 19.10.15.
@@ -14,11 +15,11 @@ public abstract class LocalSearchSolver extends RandomSolver {
         this.problem = problem;
     }
 
-    public Solution solve() {
+    public Solution solve(Arg argument) {
         boolean perform = true;
         int steps = 0;
         while (perform) {
-            perform = step();
+            perform = step(argument);
             steps++;
         }
 
@@ -26,6 +27,6 @@ public abstract class LocalSearchSolver extends RandomSolver {
         return solution;
     }
 
-    abstract protected boolean step();
+    abstract protected boolean step(Arg argument);
 
 }

@@ -48,14 +48,14 @@ public class Environment {
         }
         return null;
     }
-    public void run(SolverType type, Timer timer){
+    public void run(SolverType type, Timer timer, Arg argument){
         for(int i=0; i< instances.size();i++){
             System.out.println(instances.get(i).getName());
-            run(type,timer,i);
+            run(type,timer,i, argument);
         }
     }
 
-    private void run(SolverType type, Timer timer, int instance) {
+    private void run(SolverType type, Timer timer, int instance, Arg argument) {
         Solution solution;
         for(int i=0; i < perInstance;i++) {
             solution = timer.measure(createSolver(type,instances.get(instance)));

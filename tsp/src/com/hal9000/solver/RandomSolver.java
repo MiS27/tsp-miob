@@ -1,6 +1,7 @@
 package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
+import com.hal9000.env.Arg;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +23,7 @@ public class RandomSolver implements Solver {
         solution.setSteps(1);
     }
 
-    public Solution solve() {
+    public Solution solve(Arg argument) {
         return solution;
     }
 

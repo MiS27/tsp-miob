@@ -1,6 +1,7 @@
 package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
+import com.hal9000.env.Arg;
 
 import java.util.*;
 
@@ -47,7 +48,7 @@ public class HeuristicSolver implements Solver {
         return result;
     }
 
-    public Solution solve() {
+    public Solution solve(Arg argument) {
         return solution;
     }
 
