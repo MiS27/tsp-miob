@@ -18,10 +18,10 @@ public class Main {
         Environment env = new Environment("tsp/test",false, filesDefs,10);
         env.run(Environment.SolverType.RANDOM,new SimpleTimer(),null);
         env.run(Environment.SolverType.STEEPEST,new SimpleTimer(), new City2Opt());
-        //env.run(Environment.SolverType.GREEDY,new SimpleTimer());
-        //env.run(Environment.SolverType.HEURISTIC,new SimpleTimer());
+        env.run(Environment.SolverType.GREEDY,new SimpleTimer(), new City2Opt());
+        env.run(Environment.SolverType.HEURISTIC,new SimpleTimer(),null);
 
-        env.getReport().dump("full-report.csv", "|", true);
+        env.getReport().dump("full-report.csv", "|", false);
 
     }
 }
