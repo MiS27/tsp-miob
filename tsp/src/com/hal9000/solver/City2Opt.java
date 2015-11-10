@@ -2,7 +2,7 @@ package com.hal9000.solver;
 
 import java.util.Collections;
 
-public class City2Opt implements Opt{
+public class City2Opt implements Opt {
     @Override
     public void move(int i, int j, Solution solution) {
         Collections.swap(solution.getSolution(), i, j);
@@ -15,9 +15,9 @@ public class City2Opt implements Opt{
         int aVal = solution.getSolution().get(i);
         int bVal = solution.getSolution().get(j);
         int aPredecessor = getPredecessor(i, solution);
-        int aSuccessor = getSuccessor(i,solution);
-        int bPredecessor = getPredecessor(j,solution);
-        int bSuccessor = getSuccessor(j,solution);
+        int aSuccessor = getSuccessor(i, solution);
+        int bPredecessor = getPredecessor(j, solution);
+        int bSuccessor = getSuccessor(j, solution);
         if (aVal == bPredecessor) {
             positive = solution.getProblem().getDistance(aVal, bSuccessor) + solution.getProblem().getDistance(bVal, aPredecessor);
             negative = solution.getProblem().getDistance(aVal, aPredecessor) + solution.getProblem().getDistance(bVal, bSuccessor);
@@ -32,7 +32,8 @@ public class City2Opt implements Opt{
         }
         return positive - negative;
     }
-        private int getPredecessor(int a, Solution solution) {
+
+    private int getPredecessor(int a, Solution solution) {
         if (a == 0) {
             return solution.getSolution().get(solution.getSolution().size() - 1);
         }
