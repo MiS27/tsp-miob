@@ -45,19 +45,20 @@ public class FileType {
         Map<String, String> input = new TreeMap<>();
         for (File f : files) {
             if (f.isFile() && f.getName().endsWith(mainExt)) {
-                input.put(dict+"/"+f.getName(), null);
-                continue;
+                input.put(dict+"/"+f.getName(), dict+"/"+f.getName().split("\\.")[0]+resExt);
+                //continue;
             }
+/*
+            System.out.println(input.get(f.getName()));
             if (f.isFile() && f.getName().endsWith(resExt)) {
                 input.put(dict+"/"+f.getName().split("\\.")[0] + mainExt, dict+"/"+f.getName());
             }
-
+*/
         }
 
         if (!allowNull) {
 
             Map<String, String> tmp = new TreeMap<>();
-
             for (String k : input.keySet()) {
                 if (null != input.get(k)) {
                     tmp.put(k, input.get(k));
