@@ -2,6 +2,7 @@ package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
 import com.hal9000.env.Arg;
+import com.hal9000.env.Environment;
 
 /** Greedy solver implementation */
 public class GreedySolver extends LocalSearchSolver {
@@ -19,7 +20,7 @@ public class GreedySolver extends LocalSearchSolver {
                     solution.move(i, j);
                     improved = true;
                 }*/
-                if (((Opt)argument).getMoveDelta(i, j, solution) < -0.000001) {
+                if (((Opt)argument).getMoveDelta(i, j, solution) < -Environment.eps) {
                     ((Opt)argument).move(i, j,solution);
                     improved = true;
                 }

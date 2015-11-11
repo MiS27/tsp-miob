@@ -2,6 +2,7 @@ package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
 import com.hal9000.env.Arg;
+import com.hal9000.env.Environment;
 
 /** Steepest solver implementation */
 public class SteepestSolver extends LocalSearchSolver {
@@ -33,7 +34,7 @@ public class SteepestSolver extends LocalSearchSolver {
         }
 
 
-        if (delta < -0.000001) {
+        if (delta < -Environment.eps) {
             //solution.move(bestA, bestB);
             ((Opt)argument).move(bestA,bestB,solution);
             improved = true;

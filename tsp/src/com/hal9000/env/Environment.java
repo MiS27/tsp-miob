@@ -14,7 +14,7 @@ import java.util.List;
 public class Environment {
     /** List of available solvers */
     public enum SolverType {GREEDY, STEEPEST, HEURISTIC, RANDOM}
-
+    public final static double eps = 0.000001;
     public List<TSPInstance> instances;
     private int perInstance;
     private Report report;
