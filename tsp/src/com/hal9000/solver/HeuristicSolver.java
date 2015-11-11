@@ -16,11 +16,11 @@ public class HeuristicSolver implements Solver {
         ArrayList<Integer> solution = new ArrayList<>(problem.getDim());
 
         List<Integer> sequence = new LinkedList<>();
-        for (int i = 1; i < problem.getDim(); i++) {
+        for (int i = 0; i < problem.getDim(); i++) {
             sequence.add(i);
         }
-        solution.add(0);
-
+        Collections.shuffle(sequence);
+        solution.add(sequence.get(0));
         int last = 0;
         for (int i = 1; i < problem.getDim(); i++) {
             last = getClosest(last, sequence);

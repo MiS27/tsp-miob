@@ -16,7 +16,7 @@ public class Main {
         List<FileType> filesDefs = new ArrayList<>();
         filesDefs.add(new FileType(".tsp", ".opt.tour", new SimpleParser()));
 
-        Environment env = new Environment("tsp/test",false, filesDefs,10);
+        Environment env = new Environment("tsp/test",false, filesDefs,20);
         env.run(Environment.SolverType.RANDOM,new SimpleTimer(),null);
         env.run(Environment.SolverType.STEEPEST,new SimpleTimer(), new City2Opt());
         env.run(Environment.SolverType.GREEDY,new SimpleTimer(), new City2Opt());
