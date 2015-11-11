@@ -9,7 +9,6 @@ public class Arc2Opt implements Opt{
         for (int k = 0; k < (j - i + 1) / 2; k++) {
             Collections.swap(solution.getSolution(), i + k, j - k);
         }
-
     }
 
     @Override
@@ -20,6 +19,9 @@ public class Arc2Opt implements Opt{
         int bVal = solution.getSolution().get(j);
         int aPredecessor = getPredecessor(i, solution);
         int bSuccessor = getSuccessor(j, solution);
+        if (aVal == bSuccessor) {
+            return 0.0;
+        }
         positive = solution.getProblem().getDistance(aVal, bSuccessor) + solution.getProblem().getDistance(bVal, aPredecessor);
         negative = solution.getProblem().getDistance(aVal, aPredecessor) + solution.getProblem().getDistance(bVal, bSuccessor);
         return positive - negative;
