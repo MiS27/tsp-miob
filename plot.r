@@ -14,5 +14,13 @@ geom_point() + scale_y_log10()
 
 
 
-print(plot)
+proc <- summarySE(all, measurevar="optValDiff", groupvars=c("alg","instDim"))
+plot2 <- ggplot(proc, aes(x=instDim, y=optValDiff, colour=alg)) +
+geom_errorbar(aes(ymin=optValDiff-se, ymax=optValDiff+se), width=.1) +
+geom_line() +
+geom_point() + scale_y_log10()
+
+
+
+print(plot2)
 
