@@ -6,11 +6,7 @@ import java.util.Collections;
 public class Arc2Opt implements Opt{
     @Override
     public void move(int i, int j, Solution solution) {
-        if(Math.abs(i-j)==1){
-            Collections.swap(solution.getSolution(),i,j);
-            return;
-        }
-        for (int k = 0; k < (j - i - 1) / 2; k++) {
+        for (int k = 0; k < (j - i + 1) / 2; k++) {
             Collections.swap(solution.getSolution(), i + k, j - k);
         }
 
