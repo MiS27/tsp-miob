@@ -45,6 +45,8 @@ public class TSPInstance implements Comparable<TSPInstance>{
             //TODO
             opt += getDistance(src.get(i), src.get(i + 1));
         }
+
+        opt += getDistance(src.get(0), src.get(src.size()-1));
         return opt;
     }
 
