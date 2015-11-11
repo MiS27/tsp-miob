@@ -21,7 +21,7 @@ public class GreedySolver extends LocalSearchSolver {
                     solution.move(i, j);
                     improved = true;
                 }*/
-                if (((Opt)argument).getMoveDelta(i, j, solution) < 0) {
+                if (((Opt)argument).getMoveDelta(i, j, solution) < -0.000001) {
                     ((Opt)argument).move(i, j,solution);
                     improved = true;
                 }

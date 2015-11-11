@@ -32,6 +32,7 @@ public class SteepestSolver extends LocalSearchSolver {
             }
         }
 
+
         if (delta < 0) {
             //solution.move(bestA, bestB);
             ((Opt)argument).move(bestA,bestB,solution);
