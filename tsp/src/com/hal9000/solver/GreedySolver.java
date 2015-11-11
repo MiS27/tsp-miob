@@ -25,6 +25,7 @@ public class GreedySolver extends LocalSearchSolver {
                     ((Opt)argument).move(i, j,solution);
                     improved = true;
                 }
+                solution.setChecked(solution.getChecked()+1);
             }
         }
         return improved;
