@@ -18,6 +18,7 @@ public class RandomSolver implements Solver {
         }
         Collections.shuffle(sequence);
         solution = new Solution(sequence, problem);
+        solution.setStartCost(problem.getCost(sequence));
         solution.setSteps(1);
     }
 

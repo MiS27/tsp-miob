@@ -13,6 +13,7 @@ public class Solution {
     private double time;
     private int steps;
     private int checked;
+    private double startCost;
 
     private TSPInstance problem;
 
@@ -95,5 +96,13 @@ public class Solution {
 
     public TSPInstance getProblem() {
         return problem;
+    }
+
+    public double getStartCost() {
+        return startCost;
+    }
+
+    public void setStartCost(double startCost) {
+        this.startCost = startCost;
     }
 }
