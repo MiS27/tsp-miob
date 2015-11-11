@@ -4,9 +4,7 @@ import com.hal9000.env.Arg;
 import com.hal9000.solver.Solution;
 import com.hal9000.solver.Solver;
 
-/**
- * Created by rt on 20.10.15.
- */
+/** Timer interface */
 public interface Timer {
     void start();
     void stop();

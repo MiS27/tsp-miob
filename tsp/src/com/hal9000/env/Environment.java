@@ -10,13 +10,22 @@ import com.hal9000.time.Timer;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Main class*/
 public class Environment {
+    /** List of available solvers */
     public enum SolverType {GREEDY, STEEPEST, HEURISTIC, RANDOM}
 
     public List<TSPInstance> instances;
     private int perInstance;
     private Report report;
 
+    /**
+     *
+     * @param dict path to directory with instances
+     * @param allowNull allow to parse instances without optimal solution
+     * @param filesDef list of files definitions
+     * @param perInstance number of tests for one instance
+     */
     public Environment(String dict, boolean allowNull, List<FileType> filesDef, int perInstance) {
         this.perInstance = perInstance;
         report = new FullReport();
@@ -30,6 +39,15 @@ public class Environment {
         return report;
     }
 
+    /** Creates solver
+     *  @see SteepestSolver
+     *  @see GreedySolver
+     *  @see RandomSolver
+     *  @see HeuristicSolver
+     * @param type solver type
+     * @param instance instance of problem
+     * @return solver created for specific instance
+     */
     public Solver createSolver(SolverType type, TSPInstance instance) {
         switch (type) {
             case STEEPEST: {
@@ -48,6 +66,13 @@ public class Environment {
         }
         return null;
     }
+
+    /** Runs tests
+     *
+     * @param type solver type
+     * @param timer timer for measurments
+     * @param argument arguments for solver
+     */
     public void run(SolverType type, Timer timer, Arg argument){
         for(int i=0; i< instances.size();i++){
             System.out.println(instances.get(i).getName());
@@ -61,7 +86,6 @@ public class Environment {
             System.out.println(i);
             solution = timer.measure(createSolver(type,instances.get(instance)),argument);
             report.addToReport(type.toString(), instances.get(instance), solution);
-            //System.out.println(solution.getTime());
         }
 
 

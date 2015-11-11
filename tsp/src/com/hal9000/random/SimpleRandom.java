@@ -1,11 +1,5 @@
 package com.hal9000.random;
 
-import java.util.Date;
-import java.util.Timer;
-
-/**
- * Created by rt on 20.10.15.
- */
 public class SimpleRandom implements Random{
     private long last=1;
     private long seed;

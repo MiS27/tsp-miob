@@ -2,6 +2,7 @@ package com.hal9000.solver;
 
 import java.util.Collections;
 
+/** 2-opt implementation (arcs exchange) */
 public class Arc2Opt implements Opt{
     @Override
     public void move(int i, int j, Solution solution) {

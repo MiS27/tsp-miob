@@ -4,11 +4,16 @@ import com.hal9000.data.TSPInstance;
 import com.hal9000.solver.Solution;
 
 import java.io.*;
-import java.util.Set;
-import java.util.TreeSet;
 
+/** Creates full report of tests
+ * @see Report
+ */
 public class FullReport extends Report{
-
+    /** Saves report to file
+     * @param file path to file
+     * @param sep separator for csv file
+     * @param separate create separate files for each solver
+     */
     @Override
     public void dump(String file, String sep, boolean separate){
         Writer writer = null;

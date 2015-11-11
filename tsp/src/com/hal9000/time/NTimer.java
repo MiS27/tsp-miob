@@ -4,12 +4,16 @@ import com.hal9000.env.Arg;
 import com.hal9000.solver.Solution;
 import com.hal9000.solver.Solver;
 
-/**
- * Created by rt on 20.10.15.
- */
+
+/** Timer implementation for low-accuracy time measure(1s) */
 public class NTimer implements Timer{
     private long start,stop;
     private int N;
+
+    /**
+     *
+     * @param N  width of time window
+     */
     public NTimer(int N){
         this.N = N;
     }

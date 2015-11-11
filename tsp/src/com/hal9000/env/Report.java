@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/** Abstract class for reports
+ *
+ */
 public abstract  class Report{
     public Map<String, Map<TSPInstance, List<Solution>>> solutions;
 

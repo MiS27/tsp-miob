@@ -1,13 +1,18 @@
 package com.hal9000.data;
 
-/**
- * Created by rt on 14.10.15.
- */
+
+/** City representation*/
 public class City {
     private double x;
     private double y;
     private int id;
 
+    /**
+     *
+     * @param id unique city id
+     * @param x x coord
+     * @param y y coord
+     */
     public City(int id, double x, double y){
         this.setId(id);
         this.setX(x);

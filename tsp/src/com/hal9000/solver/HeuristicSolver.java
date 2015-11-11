@@ -5,9 +5,7 @@ import com.hal9000.env.Arg;
 
 import java.util.*;
 
-/**
- * Created by rt on 19.10.15.
- */
+/** Heuristic solver implementation */
 public class HeuristicSolver implements Solver {
 
     private final TSPInstance problem;

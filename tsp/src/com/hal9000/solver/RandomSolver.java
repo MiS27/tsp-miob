@@ -6,9 +6,7 @@ import com.hal9000.env.Arg;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by rt on 19.10.15.
- */
+/** Random solver implementation*/
 public class RandomSolver implements Solver {
 
     protected Solution solution;

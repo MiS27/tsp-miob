@@ -2,9 +2,7 @@ package com.hal9000.random;
 
 import java.security.SecureRandom;
 
-/**
- * Created by rt on 20.10.15.
- */
+
 public class URandom implements Random{
     private SecureRandom random;
     public URandom(){

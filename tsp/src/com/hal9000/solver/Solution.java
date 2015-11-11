@@ -5,9 +5,8 @@ import com.hal9000.data.TSPInstance;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by rt on 20.10.15.
- */
+
+/** Solution representation */
 public class Solution {
 
     private ArrayList<Integer> solution;

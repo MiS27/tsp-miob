@@ -10,11 +10,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/** File definition
+ *
+ */
 public class FileType {
     private String mainExt;
     private String resExt;
     private Parser parser;
 
+    /**
+     * Same base name required
+     * @param mainExtension extension of file with instance
+     * @param resultExtension extension of file with optimal solution
+     * @param parser type of parser
+     */
     public FileType(String mainExtension, String resultExtension, Parser parser){
         this.mainExt = mainExtension;
         this.resExt = resultExtension;

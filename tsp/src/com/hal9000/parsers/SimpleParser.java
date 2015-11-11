@@ -9,13 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * Created by rt on 14.10.15.
- *
- *
- *
- *
- */
+/** Parser for files like a280 */
 public class SimpleParser implements Parser{
 
     @Override

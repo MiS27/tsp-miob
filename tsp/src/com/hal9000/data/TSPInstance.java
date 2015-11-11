@@ -1,23 +1,28 @@
 package com.hal9000.data;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+/** Problem representation */
 public class TSPInstance implements Comparable<TSPInstance>{
     private Integer id = ++ID;
     private static Integer ID=0;
     private String name;
     private String comment;
     private int dim;
-    //private List<City> cities;
     private Map<Integer, City> cities;
     private double[][] distMatrix;
 
     private List<Integer> optimal=null;
     private double optimalValue=-1.0;
 
-
+    /**
+     *
+     * @param name name of instance
+     * @param comment comment
+     * @param dim dimension
+     * @param cities map of <id,City> pairs
+     */
     public TSPInstance(String name, String comment, int dim, Map<Integer,City> cities){
         this.setName(name);
         this.setComment(comment);
@@ -27,7 +32,7 @@ public class TSPInstance implements Comparable<TSPInstance>{
         recalculate();
     }
 
-
+    /** Calculates euclidean distances matrix */
     public void recalculate(){
         for(int i = 1 ; i < dim+1; i++){
             for(int j = 1 ; j < dim+1; j++){
@@ -38,11 +43,14 @@ public class TSPInstance implements Comparable<TSPInstance>{
         }
     }
 
-
+    /**
+     * Calculates overall cost
+     * @param src list of cities
+     * @return sum of distances between cities
+     */
     public double getCost(List<Integer> src){
         double opt = 0.0;
         for(int i =0; i<src.size()-1;i++){
-            //TODO
             opt += getDistance(src.get(i), src.get(i + 1));
         }
 

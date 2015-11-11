@@ -6,9 +6,8 @@ import com.hal9000.solver.Solver;
 
 import java.util.Date;
 
-/**
- * Created by rt on 20.10.15.
- */
+
+/** Simple timer implementation using System.nanoTime() */
 public class SimpleTimer implements Timer{
 
     private long start,stop;
