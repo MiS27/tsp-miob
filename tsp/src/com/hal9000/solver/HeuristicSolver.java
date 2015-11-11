@@ -21,7 +21,7 @@ public class HeuristicSolver implements Solver {
         }
         Collections.shuffle(sequence);
         solution.add(sequence.get(0));
-        int last = 0;
+        int last = sequence.get(0);
         for (int i = 1; i < problem.getDim(); i++) {
             last = getClosest(last, sequence);
             solution.add(last);

@@ -28,14 +28,14 @@ public class TSPInstance implements Comparable<TSPInstance>{
         this.setComment(comment);
         this.setDim(dim);
         this.cities = cities;
-        distMatrix = new double[dim+1][dim+1];
+        distMatrix = new double[dim][dim];
         recalculate();
     }
 
     /** Calculates euclidean distances matrix */
     public void recalculate(){
-        for(int i = 1 ; i < dim+1; i++){
-            for(int j = 1 ; j < dim+1; j++){
+        for(int i = 0 ; i < dim; i++){
+            for(int j = 0 ; j < dim; j++){
                 distMatrix[i][j] = Math.sqrt(
                                     Math.pow(cities.get(i).getX()-cities.get(j).getX(),2.0)+
                                     Math.pow(cities.get(i).getY()-cities.get(j).getY(),2.0));

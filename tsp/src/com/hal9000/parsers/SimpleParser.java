@@ -33,8 +33,8 @@ public class SimpleParser implements Parser{
                 comment = pair[0].trim().equals("COMMENT") ? comment = pair[1].trim() : comment;
             }else {
                 if(coord[0].trim().equals("EOF")) break;
-                v.put(Integer.parseInt(coord[0]),
-                        new City(Integer.parseInt(coord[0]),Double.parseDouble(coord[1]), Double.parseDouble(coord[2])));
+                v.put(Integer.parseInt(coord[0])-1,
+                        new City(Integer.parseInt(coord[0])-1,Double.parseDouble(coord[1]), Double.parseDouble(coord[2])));
             }
 
         }
@@ -56,7 +56,7 @@ public class SimpleParser implements Parser{
             if(!flag) {
                 Integer i = Integer.parseInt(line);
                 if (i < 0) break;
-                tour.add(i);
+                tour.add(i-1);
             }
 
 
