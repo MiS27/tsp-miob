@@ -30,7 +30,10 @@ public class FullReport extends Report{
                         .append("solVal").append(sep)
                         .append("solSteps").append(sep)
                         .append("solChecked").append(sep)
-                        .append("optValDiff").append("\n");
+                        .append("optValDiff").append(sep)
+                        .append("optValDiffR").append(sep)
+                        .append("startVal")
+                        .append("\n");
 
 
                 writer.write(header.toString());
@@ -48,7 +51,10 @@ public class FullReport extends Report{
                         .append("solVal").append(sep)
                         .append("solSteps").append(sep)
                         .append("solChecked").append(sep)
-                    .append("optValDiff").append("\n");
+                    .append("optValDiff").append(sep)
+                        .append("optValDiffR").append(sep)
+                        .append("startVal")
+                        .append("\n");
 
 
                 writer.write(header.toString());
@@ -65,7 +71,11 @@ public class FullReport extends Report{
                                         .append(instance.getCost(solution.getSolution())).append(sep)
                                         .append(solution.getSteps()).append(sep)
                                         .append(solution.getChecked()).append(sep)
-                                                .append(instance.getCost(solution.getSolution())-instance.getOptimalValue()).append("\n")
+                                        .append(instance.getCost(solution.getSolution())-instance.getOptimalValue()).append(sep)
+                                        .append(instance.getCost(solution.getSolution())/instance.getOptimalValue()-1.0).append(sep)
+                                                .append(solution.getStartCost())
+
+                                                .append("\n")
 
 
                                         .toString()
