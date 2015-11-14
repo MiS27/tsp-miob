@@ -5,7 +5,6 @@ import com.hal9000.data.TSPInstance;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 /** Solution representation */
 public class Solution {
 
@@ -16,6 +15,13 @@ public class Solution {
     private double startCost;
 
     private TSPInstance problem;
+
+    public double getQuality(){
+
+        double a = (problem.getCost(getSolution())/problem.getOptimalValue())-1;
+        double b = problem.getDim()/time;
+        return ((problem.getCost(getSolution())/problem.getOptimalValue())-1)/time*problem.getDim();
+    }
 
     public double getTime() {
         return time;

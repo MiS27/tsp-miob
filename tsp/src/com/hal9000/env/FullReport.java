@@ -32,7 +32,10 @@ public class FullReport extends Report{
                         .append("solChecked").append(sep)
                         .append("optValDiff").append(sep)
                         .append("optValDiffR").append(sep)
-                        .append("startVal")
+                        .append("startVal").append(sep)
+                        .append("quality").append(sep)
+                        .append("qStart").append(sep)
+                        .append("qStop")
                         .append("\n");
 
 
@@ -53,7 +56,10 @@ public class FullReport extends Report{
                         .append("solChecked").append(sep)
                     .append("optValDiff").append(sep)
                         .append("optValDiffR").append(sep)
-                        .append("startVal")
+                        .append("startVal").append(sep)
+                        .append("quality").append(sep)
+                        .append("qStart").append(sep)
+                        .append("qStop")
                         .append("\n");
 
 
@@ -73,7 +79,11 @@ public class FullReport extends Report{
                                         .append(solution.getChecked()).append(sep)
                                         .append(instance.getCost(solution.getSolution())-instance.getOptimalValue()).append(sep)
                                         .append(instance.getCost(solution.getSolution())/instance.getOptimalValue()-1.0).append(sep)
-                                                .append(solution.getStartCost())
+                                                .append(solution.getStartCost()).append(sep)
+                                                .append(solution.getQuality()).append(sep)
+                                                .append(instance.getCost(solution.getSolution())/instance.getOptimalValue()-1.0).append(sep)
+                                                .append(solution.getStartCost()/instance.getOptimalValue()-1.0)
+
 
                                                 .append("\n")
 

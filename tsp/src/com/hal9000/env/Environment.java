@@ -73,18 +73,18 @@ public class Environment {
      * @param timer timer for measurments
      * @param argument arguments for solver
      */
-    public void run(SolverType type, Timer timer, Arg argument){
+    public void run(SolverType type, String name,  Timer timer, Arg argument){
         for(int i=0; i< instances.size();i++){
-            //System.out.println(instances.get(i).getName());
-            run(type,timer,i, argument);
+            System.out.println(instances.get(i).getName());
+            run(type,name,timer,i, argument);
         }
     }
 
-    private void run(SolverType type, Timer timer, int instance, Arg argument) {
+    private void run(SolverType type, String name, Timer timer, int instance, Arg argument) {
         Solution solution;
         for(int i=0; i < perInstance;i++) {
             solution = timer.measure(createSolver(type,instances.get(instance)),argument);
-            report.addToReport(type.toString(), instances.get(instance), solution);
+            report.addToReport(name, instances.get(instance), solution);
         }
 
 
