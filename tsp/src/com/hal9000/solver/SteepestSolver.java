@@ -21,7 +21,6 @@ public class SteepestSolver extends LocalSearchSolver {
         boolean improved = false;
         for (int i = 0; i < problem.getDim(); i++) {
             for (int j = i + 1; j < problem.getDim(); j++) {
-                //tmpDelta = solution.getMoveDelta(i, j);
                 tmpDelta = ((Opt)argument).getMoveDelta(i,j,solution);
 
                 solution.setChecked(solution.getChecked()+1);
@@ -35,7 +34,6 @@ public class SteepestSolver extends LocalSearchSolver {
 
 
         if (delta < -Environment.eps) {
-            //solution.move(bestA, bestB);
             ((Opt)argument).move(bestA,bestB,solution);
             improved = true;
         }
