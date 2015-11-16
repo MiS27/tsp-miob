@@ -78,6 +78,10 @@ public class TSPInstance implements Comparable<TSPInstance>{
         this.comment = comment;
     }
 
+    /**
+     *
+     * @return problem dimension
+     */
     public int getDim() {
         return dim;
     }
@@ -94,6 +98,10 @@ public class TSPInstance implements Comparable<TSPInstance>{
         this.cities = cities;
     }
 
+    /**
+     *
+     * @return optimal solution
+     */
     public List<Integer> getOptimal() {
         return optimal;
     }
@@ -103,6 +111,10 @@ public class TSPInstance implements Comparable<TSPInstance>{
         this.optimalValue = getCost(optimal);
     }
 
+    /**
+     *
+     * @return cost of optimal solution
+     */
     public double getOptimalValue() {
         return optimalValue;
     }
