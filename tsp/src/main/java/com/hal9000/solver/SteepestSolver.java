@@ -3,6 +3,7 @@ package com.hal9000.solver;
 import com.hal9000.data.TSPInstance;
 import com.hal9000.env.Arg;
 import com.hal9000.env.Environment;
+import com.hal9000.solver.move.Opt;
 
 /** Steepest solver implementation */
 public class SteepestSolver extends LocalSearchSolver {

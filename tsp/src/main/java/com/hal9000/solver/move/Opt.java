@@ -1,4 +1,4 @@
-package com.hal9000.solver;
+package com.hal9000.solver.move;
 
 import com.hal9000.env.Arg;
 import com.hal9000.solver.Solution;

@@ -3,7 +3,7 @@ package com.hal9000;
 import com.hal9000.env.Environment;
 import com.hal9000.parsers.FileType;
 import com.hal9000.parsers.SimpleParser;
-import com.hal9000.solver.City2Opt;
+import com.hal9000.solver.move.City2Opt;
 import com.hal9000.time.SimpleTimer;
 
 import java.util.ArrayList;
