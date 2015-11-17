@@ -35,12 +35,13 @@ public class HeuristicSolver implements Solver {
         ArrayList<Integer> tmpSolution = new ArrayList<>(problem.getDim());
         double score = 0.0;
         tmpSolution.add(start);
+        sequence.remove(start);
         int last = start;
         for (int i = 1; i < problem.getDim(); i++) {
             double distance;
             int bestIdx = 0;
             double bestDistance = problem.getDistance(last, sequence.get(0));
-            for (int j = 1; j < sequence.size(); j++) {
+            for (int j = 0; j < sequence.size(); j++) {
                 distance = problem.getDistance(last, sequence.get(j));
                 if (distance < bestDistance) {
                     bestDistance = distance;
@@ -50,7 +51,8 @@ public class HeuristicSolver implements Solver {
             score += bestDistance;
             last = sequence.get(bestIdx);
             tmpSolution.add(last);
-            sequence.remove(last);
+
+            sequence.remove(bestIdx);
         }
         score += problem.getDistance(last, start);
 
