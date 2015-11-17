@@ -3,8 +3,6 @@ package com.hal9000.env;
 import com.hal9000.data.TSPInstance;
 import com.hal9000.parsers.FileType;
 import com.hal9000.solver.*;
-import com.hal9000.time.NTimer;
-import com.hal9000.time.SimpleTimer;
 import com.hal9000.time.Timer;
 
 import java.util.ArrayList;

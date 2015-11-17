@@ -3,7 +3,6 @@ package com.hal9000.solver;
 import com.hal9000.data.TSPInstance;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /** Solution representation */
 public class Solution {

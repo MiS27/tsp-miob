@@ -1,4 +1,4 @@
-package com.hal9000.solver.move;
+package test.java.com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
 import com.hal9000.env.Environment;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.*;
+//import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  * Created by mis on 15.11.15.
  */
 public class Arc2OptTest {
-
+/*
     private Opt mover;
     private ArrayList<Integer> sequence;
     private Solution solution;
@@ -100,5 +100,5 @@ public class Arc2OptTest {
             sequence.add(i);
         }
     }
-
+*/
 }

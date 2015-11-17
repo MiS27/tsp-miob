@@ -4,8 +4,6 @@ import com.hal9000.env.Arg;
 import com.hal9000.solver.Solution;
 import com.hal9000.solver.Solver;
 
-import java.util.Date;
-
 
 /** Simple timer implementation using System.nanoTime() */
 public class SimpleTimer implements Timer{
