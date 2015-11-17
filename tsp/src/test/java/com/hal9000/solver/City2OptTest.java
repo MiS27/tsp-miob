@@ -1,23 +1,22 @@
-package test.java.com.hal9000.solver;
+package com.hal9000.solver;
+
+import org.junit.Test;
 
 import com.hal9000.data.TSPInstance;
 import com.hal9000.env.Environment;
 import com.hal9000.solver.Solution;
-import org.junit.Test;
-
+import com.hal9000.solver.move.*;
 import java.util.ArrayList;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-//import static org.mockito.Mockito.mock;
-//import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /*/*
  * Created by mis on 15.11.15.
  */
 public class City2OptTest {
 
-  /*  private Opt mover;
+    private Opt mover;
     private ArrayList<Integer> sequence;
     private Solution solution;
     private int dim = 10;
@@ -111,5 +110,5 @@ public class City2OptTest {
             sequence.add(i);
         }
     }
-*/
+
 }

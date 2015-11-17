@@ -16,7 +16,7 @@ public class Main {
         List<FileType> filesDefs = new ArrayList<>();
         filesDefs.add(new FileType(".tsp", ".opt.tour", new SimpleParser()));
 
-        Environment env = new Environment("tsp/test",false, filesDefs,10);
+        Environment env = new Environment("tsp/testfiles",false, filesDefs,10);
         env.run(Environment.SolverType.RANDOM,"random",new SimpleTimer(),null);
         env.run(Environment.SolverType.STEEPEST,"steepest-arc", new SimpleTimer(), new Arc2Opt());
         env.run(Environment.SolverType.STEEPEST,"steepest-city", new SimpleTimer(), new City2Opt());
