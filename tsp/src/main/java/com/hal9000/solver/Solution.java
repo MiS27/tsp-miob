@@ -13,6 +13,10 @@ public class Solution {
     private int checked;
     private double startCost;
 
+    public void setSolution(ArrayList<Integer> solution) {
+        this.solution = solution;
+    }
+
     private TSPInstance problem;
 
     public double getQuality(){

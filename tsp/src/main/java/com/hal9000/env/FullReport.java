@@ -34,8 +34,8 @@ public class FullReport extends Report{
                         .append("optValDiffR").append(sep)
                         .append("startVal").append(sep)
                         .append("quality").append(sep)
-                        .append("qStart").append(sep)
-                        .append("qStop")
+                        .append("qStop").append(sep)
+                        .append("qStart")
                         .append("\n");
 
 
@@ -58,8 +58,8 @@ public class FullReport extends Report{
                         .append("optValDiffR").append(sep)
                         .append("startVal").append(sep)
                         .append("quality").append(sep)
-                        .append("qStart").append(sep)
-                        .append("qStop")
+                        .append("qStop").append(sep)
+                        .append("qStart")
                         .append("\n");
 
 
