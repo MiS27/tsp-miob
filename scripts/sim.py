@@ -30,7 +30,7 @@ def parseFile(filename, algs, instances, runs):
     instancesList = lines[1:instances*(runs+2):runs+2]
     for alg in range(algs):
         for instance in range(instances):
-            simMatrix = numpy.zeros((runs+1, runs+1), dtype=float)
+            simMatrix = numpy.zeros((runs+1, runs+2), dtype=float)
             runsMatrixes = []
             runsStart = getRunsStart(algs, instances, runs, alg, instance)
             sequencesLines = lines[runsStart : runsStart + runs + 1] 
@@ -38,10 +38,14 @@ def parseFile(filename, algs, instances, runs):
             for line in sequencesLines:
                 runsMatrixes.append(parseLine(line))
             for idxA, A in enumerate(runsMatrixes):
+                simMatrix[idxA][0] = idxA
                 for idxB, B in enumerate(runsMatrixes):
-                    if idxA != idxB:
-                        simMatrix[idxA][idxB] = sim(A,B)
-            numpy.savetxt(algsList[alg] + "_" + instancesList[instance] + ".csv", simMatrix, delimiter = " ")
+                    simMatrix[idxA][idxB + 1] = sim(A,B)
+            caption = algsList[alg].lower() + " i instancji " + instancesList[instance].lower() 
+            label = "tab:sim" + algsList[alg].lower() + "-" + instancesList[instance].lower() 
+            header = "\\begin{table}\n\\begin{center}\n\\begin{tabular}{SSSSSSSSSSSS}\n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10"
+            footer = "\\end{tabular}\n\\tabcaption{" + caption + "}\n\\label{" + label + "}\\end{center}\n\\end{table}"
+            numpy.savetxt(algsList[alg] + "_" + instancesList[instance] + ".tex", simMatrix, fmt = '%.3f', header = header, footer = footer, comments= '', delimiter = " & ", newline=' \\\\\n')
         
     
 parseFile("matrix.csv", 4, 2, 10)
