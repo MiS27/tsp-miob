@@ -17,25 +17,33 @@ public class Main {
         filesDefs.add(new FileType(".tsp", ".opt.tour", new SimpleParser()));
 
 
+        Environment.div= 40000000000000000l;
         //warmup
        /* Environment env = new Environment("tsp/testfiles",false, filesDefs,30);
         env.run(Environment.SolverType.STEEPEST,"steepest-arc-dummy", new SimpleTimer(), new Arc2Opt());
         env.run(Environment.SolverType.STEEPEST,"steepest-city-dummy", new SimpleTimer(), new City2Opt());
         env.run(Environment.SolverType.GREEDY,"greedy-arc-dummy",new SimpleTimer(), new Arc2Opt());
         env.run(Environment.SolverType.GREEDY,"greedy-city-dummy",new SimpleTimer(), new City2Opt());
-        env.run(Environment.SolverType.HEURISTIC,"heuristic-dummy", new SimpleTimer(), null);
-        env.run(Environment.SolverType.RANDOM,"random-dummy",new SimpleTimer(),new TimeArg(Environment.time));
-
+        //env.run(Environment.SolverType.HEURISTIC,"heuristic-dummy", new SimpleTimer(), null);
+        //env.run(Environment.SolverType.RANDOM,"random-dummy",new SimpleTimer(),new TimeArg(Environment.time));
 */
+
+        Environment.div= 40l;
         Environment env = new Environment("tsp/testfiles",false, filesDefs,10);
-        Environment.div= 40;
         env.run(Environment.SolverType.STEEPEST,"steepest-arc", new SimpleTimer(), new Arc2Opt());
+        env.getReport().dump("full-report-TS.csv", "|", false);
+
+        /*System.out.println("Steepest-arc");
+        env.run(Environment.SolverType.STEEPEST,"steepest-arc", new SimpleTimer(), new Arc2Opt());
+        System.out.println("Steepest-city");
         env.run(Environment.SolverType.STEEPEST,"steepest-city", new SimpleTimer(), new City2Opt());
-        env.run(Environment.SolverType.GREEDY,"greedy-arc",new SimpleTimer(), new Arc2Opt());
+        System.out.println("Greedy-arc");
+        env.run(Environment.SolverType.GREEDY, "greedy-arc", new SimpleTimer(), new Arc2Opt());
+        System.out.println("Greedy-city");
         env.run(Environment.SolverType.GREEDY,"greedy-city",new SimpleTimer(), new City2Opt());
-        env.run(Environment.SolverType.HEURISTIC,"heuristic", new SimpleTimer(), null);
-        env.run(Environment.SolverType.RANDOM,"random",new SimpleTimer(),new TimeArg(Environment.time));
-        env.getReport().dump("full-report.csv", "|", false);
+        //env.run(Environment.SolverType.HEURISTIC,"heuristic", new SimpleTimer(), null);
+        //env.run(Environment.SolverType.RANDOM,"random",new SimpleTimer(),new TimeArg(Environment.time));
+        //env.getReport().dump("full-report-sc-s.csv", "|", false);
 
   /*Environment      env = new Environment("tsp/test2",false, filesDefs,2000);
         env.run(Environment.SolverType.GREEDY,"greedy-city",new SimpleTimer(), new City2Opt());
