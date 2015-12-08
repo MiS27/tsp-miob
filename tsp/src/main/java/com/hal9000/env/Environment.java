@@ -16,7 +16,7 @@ public class Environment {
      * List of available solvers
      */
     public enum SolverType {
-        GREEDY, STEEPEST, HEURISTIC, RANDOM
+        GREEDY, STEEPEST, HEURISTIC, RANDOM, TABU
     }
 
     public final static double eps = 0.00000000001;
@@ -74,6 +74,9 @@ public class Environment {
             case RANDOM: {
                 return new RandomSolver(instance);
             }
+            case TABU: {
+                return new TabuSearchSolver(instance);
+            }
 
         }
         return null;
@@ -103,10 +106,20 @@ public class Environment {
 
     private void run(SolverType type, String name, Timer timer, int instance, Arg argument) {
         Solution solution = null;
+        for(Integer it : instances.get(instance).getOptimal()){
+                System.out.print(it + " ");
+            }
+        System.out.println();
         for (int i = 0; i < perInstance; i++) {
             solution = timer.measure(createSolver(type, instances.get(instance)), argument);
-            if(type != SolverType.RANDOM && type != SolverType.HEURISTIC) time.set(instance,time.get(instance)+Math.round(solution.getTime()*1000000000));
+            if(type == SolverType.GREEDY || type == SolverType.STEEPEST) time.set(instance,time.get(instance)+Math.round(solution.getTime()*1000000000));
             report.addToReport(name, instances.get(instance), solution);
+
+            for(Integer it : solution.getSolution()){
+                System.out.print(it + " ");
+            }
+
+            System.out.println();
         }
     }
 
