@@ -30,7 +30,7 @@ public class Main {
 
         Environment.div= 40l;
         Environment env = new Environment("tsp/testfiles",false, filesDefs,10);
-        env.run(Environment.SolverType.STEEPEST,"steepest-arc", new SimpleTimer(), new Arc2Opt());
+        env.run(Environment.SolverType.TABU,"tabu", new SimpleTimer(), new Arc2Opt());
         env.getReport().dump("full-report-TS.csv", "|", false);
 
         /*System.out.println("Steepest-arc");

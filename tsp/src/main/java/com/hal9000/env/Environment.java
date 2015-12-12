@@ -16,7 +16,7 @@ public class Environment {
      * List of available solvers
      */
     public enum SolverType {
-        GREEDY, STEEPEST, HEURISTIC, RANDOM, TABU
+        GREEDY, STEEPEST, HEURISTIC, RANDOM, TABU, ANNEALING
     }
 
     public final static double eps = 0.00000000001;
@@ -75,7 +75,11 @@ public class Environment {
                 return new RandomSolver(instance);
             }
             case TABU: {
-                return new TabuSearchSolver(instance);
+                return new TabuSearchSolver(instance, 0.4, 0.1, 5);
+            }
+            case ANNEALING:{
+            //    return  new SimulatedAnnealingSolver(instance);
+                return null;
             }
 
         }
