@@ -18,6 +18,7 @@ public class TabuSearchSolver extends LocalSearchSolver {
 
     private double tLen, cLen;
     private int stopLimit;
+    private int sols=0;
 
 
     public TabuSearchSolver(TSPInstance problem, double tLen, double cLen, int stopLimit) {
@@ -31,7 +32,7 @@ public class TabuSearchSolver extends LocalSearchSolver {
         this.tLen = tLen;
         this.cLen = cLen;
         cSize = (int)(problem.getDim()*cLen) +1;
-        this.stopLimit = stopLimit;
+        this.stopLimit = Math.max(stopLimit,(int)(0.5*problem.getDim()));
     }
 
     @Override
@@ -53,6 +54,8 @@ public class TabuSearchSolver extends LocalSearchSolver {
         }
 
         solution.setSteps(steps);
+        solution.setChecked(sols);
+        System.out.println(sols);
         return solution;
     }
 
@@ -61,8 +64,9 @@ public class TabuSearchSolver extends LocalSearchSolver {
         List<Move> tmp = new ArrayList<>();
         for (int i = 0; i < problem.getDim(); i++) {
             for (int j = i + 1; j < problem.getDim(); j++) {
-                if(mat[i][j] > 0) continue;
-                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,solution);
+                sols++;
+                //if(mat[i][j] > 0) continue;
+                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,solution)+solution.getStartCost()+mat[i][j];
                 tmp.add(new Move(i,j,tmpDelta));
             }
         }
@@ -80,26 +84,28 @@ public class TabuSearchSolver extends LocalSearchSolver {
         boolean perform = false;
         Move bestCanditate = null;
 
+        //getCandidates(argument);
 
         bestdelta = ((Opt)argument).getMoveDelta(candidates.get(0).getX(), candidates.get(0).getY(), this.solution);
         bestCanditate = candidates.get(0);
         for(int i=1; i<candidates.size();i++){
+            sols++;
             double delta = ((Opt)argument).getMoveDelta(candidates.get(i).getX(), candidates.get(i).getY(), this.solution);
-            if(delta - bestdelta < Environment.eps) {
-                bestdelta = candidates.get(i).getDelta();
+            if(delta < bestdelta) {
+                bestdelta = delta;
                 bestCanditate = candidates.get(i);
             }
         }
         for(Move m : tabuList){
+            sols++;
             double delta = ((Opt)argument).getMoveDelta(m.getX(), m.getY(), this.solution);
-            if(delta <= -Environment.eps && delta-bestdelta < Environment.eps ){
+            if(delta <0.0 && delta<bestdelta ){
                 bestdelta = delta;
                 bestCanditate = m;
             }
         }
 
-
-        if(bestdelta < -Environment.eps) {
+        if(bestdelta < 0.0) {
             perform = true;
             ((Opt) argument).move(bestCanditate.getX(), bestCanditate.getY(), this.solution);
         }

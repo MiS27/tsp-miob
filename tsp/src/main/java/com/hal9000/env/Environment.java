@@ -75,7 +75,7 @@ public class Environment {
                 return new RandomSolver(instance);
             }
             case TABU: {
-                return new TabuSearchSolver(instance, 0.4, 0.1, 5);
+                return new TabuSearchSolver(instance, 0.9, 0.3, 25);
             }
             case ANNEALING:{
             //    return  new SimulatedAnnealingSolver(instance);
