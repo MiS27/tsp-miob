@@ -7,32 +7,46 @@ import com.hal9000.solver.move.Opt;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class TabuSearchSolver extends LocalSearchSolver {
     private int[][] mat;
-    private List<Move> tabuList;
+    private LinkedList<Move> tabuList;
     private List<Move> candidates;
     private Move worstCandidate;
     private int tabuSize, cSize;
+    private Move[][] mSpace;
 
     private double tLen, cLen;
     private int stopLimit;
     private int sols=0;
 
+    private Solution currentSolution;
+
 
     public TabuSearchSolver(TSPInstance problem, double tLen, double cLen, int stopLimit) {
         super(problem);
+        this.tLen = tLen;
+        this.cLen = cLen;
         mat = new int[problem.getDim()][problem.getDim()];
         candidates = new ArrayList<>();
 
         tabuSize = (int)(problem.getDim()*tLen) +1;
-        tabuList = new ArrayList<Move>(tabuSize);
+        tabuList = new LinkedList<Move>();
 
-        this.tLen = tLen;
-        this.cLen = cLen;
         cSize = (int)(problem.getDim()*cLen) +1;
         this.stopLimit = Math.max(stopLimit,(int)(0.5*problem.getDim()));
+        mSpace = new Move[problem.getDim()][problem.getDim()];
+
+        for (int i = 0; i < problem.getDim(); i++) {
+            for (int j = i + 1; j < problem.getDim(); j++) {
+                mSpace[i][j] = new Move(i,j,0.0,false);
+            }
+        }
+        currentSolution = new Solution(new ArrayList<Integer>(solution.getSolution()),problem);
+
     }
 
     @Override
@@ -65,9 +79,9 @@ public class TabuSearchSolver extends LocalSearchSolver {
         for (int i = 0; i < problem.getDim(); i++) {
             for (int j = i + 1; j < problem.getDim(); j++) {
                 sols++;
-                //if(mat[i][j] > 0) continue;
-                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,solution)+solution.getStartCost()+mat[i][j];
-                tmp.add(new Move(i,j,tmpDelta));
+                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,currentSolution);//+mat[i][j];
+                mSpace[i][j].setDelta(tmpDelta);
+                tmp.add(mSpace[i][j]);
             }
         }
         Collections.sort(tmp);
@@ -75,54 +89,48 @@ public class TabuSearchSolver extends LocalSearchSolver {
            candidates.add(tmp.get(i));
         }
         worstCandidate = candidates.get(candidates.size()-1);
-
     }
 
     @Override
     protected boolean step(Arg argument) {
-        double bestdelta = 0.0;
+        double bestdelta = 10000000.0;
         boolean perform = false;
         Move bestCanditate = null;
 
-        //getCandidates(argument);
-
-        bestdelta = ((Opt)argument).getMoveDelta(candidates.get(0).getX(), candidates.get(0).getY(), this.solution);
-        bestCanditate = candidates.get(0);
-        for(int i=1; i<candidates.size();i++){
+        for(Move m : candidates){
             sols++;
-            double delta = ((Opt)argument).getMoveDelta(candidates.get(i).getX(), candidates.get(i).getY(), this.solution);
-            if(delta < bestdelta) {
-                bestdelta = delta;
-                bestCanditate = candidates.get(i);
+            double delta = ((Opt)argument).getMoveDelta(m.getX(),m.getY(),currentSolution);
+            if(m.isTabu()){
+                delta = ((Opt)argument).getMoveDelta(m.getX(),m.getY(),solution);
             }
-        }
-        for(Move m : tabuList){
-            sols++;
-            double delta = ((Opt)argument).getMoveDelta(m.getX(), m.getY(), this.solution);
-            if(delta <0.0 && delta<bestdelta ){
+            if(bestdelta > delta){
+
                 bestdelta = delta;
                 bestCanditate = m;
             }
         }
 
-        if(bestdelta < 0.0) {
+        ((Opt)argument).move(bestCanditate.getX(),bestCanditate.getY(),currentSolution);
+        tabuList.add(bestCanditate);
+        mat[bestCanditate.getX()][bestCanditate.getY()]++;
+        if(tabuList.size() >= tabuSize){
+            Move m = tabuList.poll();
+            mat[m.getX()][m.getY()]--;
+            //tabuList.removeIf(m::same);
+
+        }
+
+
+        if(problem.getCost(currentSolution.getSolution()) < problem.getCost(solution.getSolution())){
+            solution.setSolution(new ArrayList<>(currentSolution.getSolution()));
             perform = true;
-            ((Opt) argument).move(bestCanditate.getX(), bestCanditate.getY(), this.solution);
         }
-        if(candidates.contains(bestCanditate)){
-            candidates.remove(bestCanditate);
-        }
-        if(candidates.size() == 0 || bestdelta > ((Opt)argument).getMoveDelta(worstCandidate.getX(),worstCandidate.getY(),this.solution)){
+
+
+        if(((Opt)argument).getMoveDelta(worstCandidate.getX(),worstCandidate.getY(),currentSolution)
+                < ((Opt)argument).getMoveDelta(bestCanditate.getX(),bestCanditate.getY(),currentSolution)){
             getCandidates(argument);
         }
-        tabuList.add(bestCanditate);
-
-        mat[bestCanditate.getX()][bestCanditate.getY()]++;
-        if(tabuList.size() == tabuSize){
-            mat[tabuList.get(0).getX()][tabuList.get(0).getY()]--;
-            tabuList.remove(0);
-        }
-
 
 
         return perform;
@@ -132,11 +140,21 @@ public class TabuSearchSolver extends LocalSearchSolver {
     class Move implements Comparable<Move> {
         int x, y;
         Double delta;
+        boolean tabu;
 
-        public Move(int x, int y, double delta) {
+        public void setTabu(boolean tabu) {
+            this.tabu = tabu;
+        }
+
+        public boolean isTabu() {
+            return tabu;
+        }
+
+        public Move(int x, int y, double delta, boolean t) {
             setX(x);
             setY(y);
             setDelta(delta);
+            setTabu(t);
         }
 
         public void setDelta(double delta) {
@@ -163,8 +181,8 @@ public class TabuSearchSolver extends LocalSearchSolver {
             return y;
         }
 
-        public boolean same(int i, int j){
-            return i == getX() && j ==getY();
+        public boolean same(Move move){
+            return move.getX() == getX() && move.getY() ==getY();
         }
         @Override
         public int compareTo(Move move) {
