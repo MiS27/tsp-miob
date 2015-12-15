@@ -100,10 +100,11 @@ public class TabuSearchSolver extends LocalSearchSolver {
         for(Move m : candidates){
             sols++;
             double delta = ((Opt)argument).getMoveDelta(m.getX(),m.getY(),currentSolution);
-            if(m.isTabu()){
-                delta = ((Opt)argument).getMoveDelta(m.getX(),m.getY(),solution);
-            }
+
             if(bestdelta > delta){
+                if(m.isTabu() && delta > 0.0){
+                    continue;
+                }
 
                 bestdelta = delta;
                 bestCanditate = m;
@@ -111,15 +112,6 @@ public class TabuSearchSolver extends LocalSearchSolver {
         }
 
         ((Opt)argument).move(bestCanditate.getX(),bestCanditate.getY(),currentSolution);
-        tabuList.add(bestCanditate);
-        mat[bestCanditate.getX()][bestCanditate.getY()]++;
-        if(tabuList.size() >= tabuSize){
-            Move m = tabuList.poll();
-            mat[m.getX()][m.getY()]--;
-            //tabuList.removeIf(m::same);
-
-        }
-
 
         if(problem.getCost(currentSolution.getSolution()) < problem.getCost(solution.getSolution())){
             solution.setSolution(new ArrayList<>(currentSolution.getSolution()));
@@ -127,7 +119,16 @@ public class TabuSearchSolver extends LocalSearchSolver {
         }
 
 
-        if(((Opt)argument).getMoveDelta(worstCandidate.getX(),worstCandidate.getY(),currentSolution)
+        tabuList.add(bestCanditate);
+        mat[bestCanditate.getX()][bestCanditate.getY()]++;
+        if(tabuList.size() >= tabuSize){
+            Move m = tabuList.poll();
+            mat[m.getX()][m.getY()]--;
+
+        }
+
+        //if(((Opt)argument).getMoveDelta(worstCandidate.getX(),worstCandidate.getY(),currentSolution)
+        if(worstCandidate.getDelta()
                 < ((Opt)argument).getMoveDelta(bestCanditate.getX(),bestCanditate.getY(),currentSolution)){
             getCandidates(argument);
         }
