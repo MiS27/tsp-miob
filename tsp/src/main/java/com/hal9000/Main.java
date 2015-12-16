@@ -34,7 +34,11 @@ public class Main {
         env.run(Environment.SolverType.TABU,"tabu-city", new SimpleTimer(), new City2Opt());
         env.getReport().dump("full-report-TS-40-20-25-50.csv", "|", false);
 
-        /*System.out.println("Steepest-arc");
+        /*System.out.println("sa-arc");
+        env.run(Environment.SolverType.ANNEALING,"sa-arc", new SimpleTimer(), new Arc2Opt());
+        System.out.println("Sa-city");
+        env.run(Environment.SolverType.ANNEALING,"sa-city", new SimpleTimer(), new City2Opt());
+        System.out.println("Steepest-arc");
         env.run(Environment.SolverType.STEEPEST,"steepest-arc", new SimpleTimer(), new Arc2Opt());
         System.out.println("Steepest-city");
         env.run(Environment.SolverType.STEEPEST,"steepest-city", new SimpleTimer(), new City2Opt());

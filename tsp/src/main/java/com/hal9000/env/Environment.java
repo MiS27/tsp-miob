@@ -77,9 +77,8 @@ public class Environment {
             case TABU: {
                 return new TabuSearchSolver(instance, 0.4, 0.2, 25, 0.5);
             }
-            case ANNEALING:{
-            //    return  new SimulatedAnnealingSolver(instance);
-                return null;
+            case ANNEALING: {
+                return new SimulatedAnnealingSolver(instance, instance.getDim() * instance.getDim(), 0.9, 10);
             }
 
         }
