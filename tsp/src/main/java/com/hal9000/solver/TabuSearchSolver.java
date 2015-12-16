@@ -77,7 +77,7 @@ public class TabuSearchSolver extends LocalSearchSolver {
         for (int i = 0; i < problem.getDim(); i++) {
             for (int j = i + 1; j < problem.getDim(); j++) {
                 sols++;
-                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,currentSolution);//+mat[i][j];
+                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,currentSolution)+mat[i][j];
                 mSpace[i][j].setDelta(tmpDelta);
                 tmp.add(mSpace[i][j]);
             }
