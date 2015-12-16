@@ -28,7 +28,7 @@ public class SimulatedAnnealingSolver extends RandomSolver {
     public SimulatedAnnealingSolver(TSPInstance problem, int lk, double alpha, int stop) {
         super(problem);
         this.problem = problem;
-        this.lk = problem.getDim() * problem.getDim();
+        this.lk = lk;
         this.alpha = alpha;
         this.stop = stop;
         random = new Random();
