@@ -2,14 +2,12 @@ package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
 import com.hal9000.env.Arg;
-import com.hal9000.env.Environment;
 import com.hal9000.solver.move.Opt;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class TabuSearchSolver extends LocalSearchSolver {
     private int[][] mat;
@@ -113,6 +111,8 @@ public class TabuSearchSolver extends LocalSearchSolver {
 
         ((Opt)argument).move(bestCanditate.getX(),bestCanditate.getY(),currentSolution);
 
+
+
         if(problem.getCost(currentSolution.getSolution()) < problem.getCost(solution.getSolution())){
             solution.setSolution(new ArrayList<>(currentSolution.getSolution()));
             perform = true;
@@ -120,10 +120,12 @@ public class TabuSearchSolver extends LocalSearchSolver {
 
 
         tabuList.add(bestCanditate);
+        bestCanditate.setTabu(true);
         mat[bestCanditate.getX()][bestCanditate.getY()]++;
         if(tabuList.size() >= tabuSize){
             Move m = tabuList.poll();
             mat[m.getX()][m.getY()]--;
+            if(mat[m.getX()][m.getY()]==0) m.setTabu(false);
 
         }
 
