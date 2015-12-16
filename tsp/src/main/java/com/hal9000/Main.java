@@ -19,19 +19,20 @@ public class Main {
 
         Environment.div= 40000000000000000l;
         //warmup
-       /* Environment env = new Environment("tsp/testfiles",false, filesDefs,30);
+        Environment env = new Environment("tsp/testfiles",false, filesDefs,30);
         env.run(Environment.SolverType.STEEPEST,"steepest-arc-dummy", new SimpleTimer(), new Arc2Opt());
         env.run(Environment.SolverType.STEEPEST,"steepest-city-dummy", new SimpleTimer(), new City2Opt());
         env.run(Environment.SolverType.GREEDY,"greedy-arc-dummy",new SimpleTimer(), new Arc2Opt());
         env.run(Environment.SolverType.GREEDY,"greedy-city-dummy",new SimpleTimer(), new City2Opt());
         //env.run(Environment.SolverType.HEURISTIC,"heuristic-dummy", new SimpleTimer(), null);
         //env.run(Environment.SolverType.RANDOM,"random-dummy",new SimpleTimer(),new TimeArg(Environment.time));
-*/
+
 
         Environment.div= 40l;
-        Environment env = new Environment("tsp/testfiles",false, filesDefs,10);
-        env.run(Environment.SolverType.TABU,"tabu", new SimpleTimer(), new Arc2Opt());
-        env.getReport().dump("full-report-TS.csv", "|", false);
+        /*Environment*/ env = new Environment("tsp/testfiles",false, filesDefs,10);
+        env.run(Environment.SolverType.TABU,"tabu-arc", new SimpleTimer(), new Arc2Opt());
+        env.run(Environment.SolverType.TABU,"tabu-city", new SimpleTimer(), new City2Opt());
+        env.getReport().dump("full-report-TS-40-20-25-50.csv", "|", false);
 
         /*System.out.println("Steepest-arc");
         env.run(Environment.SolverType.STEEPEST,"steepest-arc", new SimpleTimer(), new Arc2Opt());

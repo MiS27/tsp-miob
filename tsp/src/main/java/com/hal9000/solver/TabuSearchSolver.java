@@ -2,40 +2,36 @@ package com.hal9000.solver;
 
 import com.hal9000.data.TSPInstance;
 import com.hal9000.env.Arg;
+import com.hal9000.env.Environment;
 import com.hal9000.solver.move.Opt;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TabuSearchSolver extends LocalSearchSolver {
-    private int[][] mat;
+    private int[][] freqMatrix;
     private LinkedList<Move> tabuList;
     private List<Move> candidates;
     private Move worstCandidate;
-    private int tabuSize, cSize;
+    private int tabuSize, candSize;
     private Move[][] mSpace;
-
-    private double tLen, cLen;
+    private Random rand = new Random();
     private int stopLimit;
-    private int sols=0;
+    private int solutions=0;
 
     private Solution currentSolution;
 
 
-    public TabuSearchSolver(TSPInstance problem, double tLen, double cLen, int stopLimit) {
+    public TabuSearchSolver(TSPInstance problem, double tabuFactor, double candFactor, int stopLimit, double limitFactor) {
         super(problem);
-        this.tLen = tLen;
-        this.cLen = cLen;
-        mat = new int[problem.getDim()][problem.getDim()];
+
+        freqMatrix = new int[problem.getDim()][problem.getDim()];
         candidates = new ArrayList<>();
 
-        tabuSize = (int)(problem.getDim()*tLen) +1;
+        tabuSize = (int)(problem.getDim()*tabuFactor) +1;
         tabuList = new LinkedList<Move>();
 
-        cSize = (int)(problem.getDim()*cLen) +1;
-        this.stopLimit = Math.max(stopLimit,(int)(0.5*problem.getDim()));
+        candSize = (int)(problem.getDim()*candFactor) +1;
+        this.stopLimit = Math.max(stopLimit,(int)(limitFactor*problem.getDim()));
         mSpace = new Move[problem.getDim()][problem.getDim()];
 
         for (int i = 0; i < problem.getDim(); i++) {
@@ -66,8 +62,7 @@ public class TabuSearchSolver extends LocalSearchSolver {
         }
 
         solution.setSteps(steps);
-        solution.setChecked(sols);
-        System.out.println(sols);
+        solution.setChecked(solutions);
         return solution;
     }
 
@@ -76,14 +71,14 @@ public class TabuSearchSolver extends LocalSearchSolver {
         List<Move> tmp = new ArrayList<>();
         for (int i = 0; i < problem.getDim(); i++) {
             for (int j = i + 1; j < problem.getDim(); j++) {
-                sols++;
-                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,currentSolution)+mat[i][j];
+                solutions++;
+                double tmpDelta = ((Opt)argument).getMoveDelta(i,j,currentSolution)+ freqMatrix[i][j];
                 mSpace[i][j].setDelta(tmpDelta);
                 tmp.add(mSpace[i][j]);
             }
         }
         Collections.sort(tmp);
-        for (int i = 0; i < cSize; i++) {
+        for (int i = 0; i < candSize; i++) {
            candidates.add(tmp.get(i));
         }
         worstCandidate = candidates.get(candidates.size()-1);
@@ -91,16 +86,17 @@ public class TabuSearchSolver extends LocalSearchSolver {
 
     @Override
     protected boolean step(Arg argument) {
-        double bestdelta = 10000000.0;
         boolean perform = false;
-        Move bestCanditate = null;
+        Move bestCanditate = candidates.get(rand.nextInt(candidates.size()-1));
+        double bestdelta = ((Opt)argument).getMoveDelta(bestCanditate.getX(),bestCanditate.getY(),currentSolution);
+        solutions++;
 
         for(Move m : candidates){
-            sols++;
+            solutions++;
             double delta = ((Opt)argument).getMoveDelta(m.getX(),m.getY(),currentSolution);
 
             if(bestdelta > delta){
-                if(m.isTabu() && delta > 0.0){
+                if(m.isTabu() && delta > -Environment.eps){
                     continue;
                 }
 
@@ -121,11 +117,11 @@ public class TabuSearchSolver extends LocalSearchSolver {
 
         tabuList.add(bestCanditate);
         bestCanditate.setTabu(true);
-        mat[bestCanditate.getX()][bestCanditate.getY()]++;
+        freqMatrix[bestCanditate.getX()][bestCanditate.getY()]++;
         if(tabuList.size() >= tabuSize){
             Move m = tabuList.poll();
-            mat[m.getX()][m.getY()]--;
-            if(mat[m.getX()][m.getY()]==0) m.setTabu(false);
+            freqMatrix[m.getX()][m.getY()]--;
+            if(freqMatrix[m.getX()][m.getY()]==0) m.setTabu(false);
 
         }
 
