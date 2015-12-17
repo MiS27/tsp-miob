@@ -125,7 +125,6 @@ public class TabuSearchSolver extends LocalSearchSolver {
 
         }
 
-        //if(((Opt)argument).getMoveDelta(worstCandidate.getX(),worstCandidate.getY(),currentSolution)
         if(worstCandidate.getDelta()
                 < ((Opt)argument).getMoveDelta(bestCanditate.getX(),bestCanditate.getY(),currentSolution)){
             getCandidates(argument);
