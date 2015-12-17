@@ -30,9 +30,9 @@ public class Main {
 
         Environment.div= 40l;
         /*Environment*/ env = new Environment("tsp/testfiles",false, filesDefs,10);
-        env.run(Environment.SolverType.TABU,"tabu-arc", new SimpleTimer(), new Arc2Opt());
-        env.run(Environment.SolverType.TABU,"tabu-city", new SimpleTimer(), new City2Opt());
-        env.getReport().dump("full-report-TS-40-20-25-50.csv", "|", false);
+        env.run(Environment.SolverType.ANNEALING,"sa-arc", new SimpleTimer(), new Arc2Opt());
+        env.run(Environment.SolverType.ANNEALING,"sa-city", new SimpleTimer(), new City2Opt());
+        env.getReport().dump("full-report-SA.csv", "|", false);
 
         /*System.out.println("sa-arc");
         env.run(Environment.SolverType.ANNEALING,"sa-arc", new SimpleTimer(), new Arc2Opt());
