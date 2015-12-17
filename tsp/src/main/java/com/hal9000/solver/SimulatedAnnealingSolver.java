@@ -66,7 +66,7 @@ public class SimulatedAnnealingSolver extends RandomSolver {
         }
         double mean = DoubleMath.mean(deltas);
         if (deltaZero < solutions * moves) {
-            result = (int) Math.ceil(-Math.log(1 - 0.1/(1-deltaZero/(solutions*moves)))/mean);
+            result = (int) Math.ceil(-mean/Math.log(1 - 0.1/(1-deltaZero/(solutions*moves))));
         }
         return result;
     }
